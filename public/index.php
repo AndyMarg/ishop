@@ -1,10 +1,13 @@
 <?php
 
+use core\base\Application;
+
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-//$i = require_once dirname(__DIR__) . '/config/config_data.php'; 
+//xdebug_disable();
 
-$a = new \core\base\Application('test config');
-var_dump($a);
+// Инициализирум приложение. Передаем json c настройками конфигурации
+Application::Init("data_file_name");
 
-//var_dump($a->config);
+
+

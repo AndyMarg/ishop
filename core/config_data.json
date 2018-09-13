@@ -1,0 +1,7 @@
+{
+    "debug": true,
+    "test": {
+        "attribute_1": "value-1",
+        "attribute_2": "value-2"
+    }
+}
