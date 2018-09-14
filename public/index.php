@@ -7,7 +7,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 //xdebug_disable();
 
 // Инициализирум приложение. Передаем json c настройками конфигурации
-Application::Init("data_file_name");
+Application::Init('/config/config_app.json');
 
 
 

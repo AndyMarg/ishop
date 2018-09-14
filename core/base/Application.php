@@ -18,13 +18,13 @@ class Application {
     /**
      * Инициализирует приложение.
      * 
-     * @param string $config_file Файл json с конфигурационными параметрами.
+     * @param string $app_config_file Файл json с конфигурационными параметрами.
      */
-    public static function Init(string $config_file) 
+    public static function Init(string $app_config_file = "") 
     {
         // создаем объект конфигурации
         $config = self::$config = Config::getInstance();
-        $config->Init($config_file);
+        $config->Init($app_config_file);
     }
     
 
