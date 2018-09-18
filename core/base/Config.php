@@ -12,8 +12,6 @@ final class Config
     private $app_config = [];       // массив данных конфигурации приложения
     private $config = [];           // результирующий массив данных конфигурации
     
-    
-
     /**
      * Единственный экземпляр конфигурации
      * @return \core\base\Config 

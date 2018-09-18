@@ -5,8 +5,11 @@
     "autoload": {
         "psr-4": {
             "core\\": "core",
-            "app\\": "app"
+            "app\\": "app",
+            "tests\\": "tests"
         }
     },
-    "require": {}
+    "require": {},
+    "require-dev": {
+    }
 }

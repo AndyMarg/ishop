@@ -1,0 +1,24 @@
+{
+    "app01": "v_app01",
+    "app02": "v_app02",
+    "default01": "v_rewrite01",
+    "default02": "v_default02",
+    "app03": {
+        "app03_01": "v_app03_01",
+        "app03_02": "v_app03_02",
+        "app03_03": {
+            "app03_03_01": "v_app03_03_01"
+        }
+    },
+    "default05": {
+        "default05_01": "v_rewrite05_01",
+        "default05_02": {
+            "default05_02_01": "v_default05_02_01",
+            "default05_02_02": {
+                "default05_02_02_01": "v_rewrite_02_02_01"
+            },
+            "default05_02_03": "v_rewrite_02_03"
+        }
+    }
+}
+
