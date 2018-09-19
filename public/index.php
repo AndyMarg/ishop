@@ -1,14 +1,15 @@
 <?php
 
-use core\base\Application;
-
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use core\base\Application;
 
 //xdebug_disable();
 
-echo 
+// корень приложения
+define('ROOT', filter_input(INPUT_SERVER, 'DOCUMENT_ROOT'));
 
-// Инициализирум приложение. Передаем json c настройками конфигурации
-Application::Init('/config/config_app.json');
+// Инициализирум приложение. Передаем корневой каталог приложения и json c настройками конфигурации
+Application::Init(ROOT, '/config/config_app.json');
 
 

@@ -15,9 +15,9 @@
         "default05_02": {
             "default05_02_01": "v_default05_02_01",
             "default05_02_02": {
-                "default05_02_02_01": "v_rewrite_02_02_01"
+                "default05_02_02_01": "v_rewrite05_02_02_01"
             },
-            "default05_02_03": "v_rewrite_02_03"
+            "default05_02_03": "v_rewrite05_02_03"
         }
     }
 }
