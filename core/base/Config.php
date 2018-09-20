@@ -2,6 +2,8 @@
 
 namespace core\base;
 
+use core\libs\ArrayAsObject;
+
 /**
  * Управление конфигурацией. Singleton.
  */

@@ -8,10 +8,23 @@ namespace core\base;
  */
 class Application {
 
+    /**
+     * Вернуть объект конфигурации приложения
+     * 
+     * @return type Congig class
+     */
     public static function getConfig() {
         return Config::getInstance();
     }
     
+    /**
+     * Вернуть URL корня приложения
+     * @return type string 
+     */
+    public static function getRootURL() {
+        return 'http://' . filter_input(INPUT_SERVER, 'SERVER_NAME');
+    }
+
     /**
      * Инициализирует приложение.
      * 
@@ -23,5 +36,5 @@ class Application {
         $config = Config::getInstance();
         $config->Init($app_root, $app_config_file);
     }
-
+    
 } 

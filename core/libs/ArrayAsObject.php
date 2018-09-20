@@ -1,6 +1,6 @@
 <?php
 
-namespace core\base;
+namespace core\libs;
 
 /**
  * Массив как объект. Доступ с несущестующему свойству через __SET

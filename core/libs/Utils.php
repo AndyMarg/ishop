@@ -1,6 +1,6 @@
 <?php
 
-namespace core\base;
+namespace core\libs;
 
 /**
  * Служебные методы

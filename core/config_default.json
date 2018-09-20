@@ -1,28 +1,22 @@
 {
-    "default01": "v_default01",
-    "default02": "v_default02",
-    "default03": {
-        "default03_01": "v_default03_01",
-        "default03_02": "v_default03_02"
+    "mode": "development",
+    "dirs": {
+        "root": "",
+        "www": "/public",
+        "core": "/core/base",
+        "libs": "/core/libs",
+        "cache": "/tmp/cache",
+        "config": "/config",
+        "app": "/app",
+        "controllers": "/app/controllers",
+        "models": "/app/models",
+        "views": "/app/views",
+        "widgets": "/app/widgets"
     },
-    "default04": {
-        "default04_01": "v_default04_01",
-        "default04_02": {
-            "default04_02_01": "v_default04_02_01",
-            "default04_02_02": "default04_02_02"
-        },
-        "default04_03": "v_default03_03"
+    "uri": {
+        "admin": "/admin"
     },
-    "default05": {
-        "default05_01": "v_default05_01",
-        "default05_02": {
-            "default05_02_01": "v_default05_02_01",
-            "default05_02_02": {
-                "default05_02_02_01": "v_default05_02_02_01",
-                "default05_02_02_02": "v_default05_02_02_02"
-            },
-            "default05_02_03": "v_default05_02_03"
-        },
-        "default05_03": "v_default05_03"
+    "defaults": {
+        "layout": "default"
     }
 }
