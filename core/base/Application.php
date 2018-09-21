@@ -35,6 +35,12 @@ class Application {
         // создаем объект конфигурации
         $config = Config::getInstance();
         $config->Init($app_root, $app_config_file);
+        
+        // инициализируем обработчик ошибок
+        new ErrorHandler();
+        
+        // стартуем сессию
+        session_start();
     }
     
 } 

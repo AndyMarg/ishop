@@ -9,41 +9,32 @@ use core\libs\ArrayAsObject;
  */
 final class Config
 {
-    private static $instance;
+    use \core\libs\TSingleton; 
     
     private $default_config = [];   // массив данных конфигурации по умолчанию
     private $app_config = [];       // массив данных конфигурации приложения
     private $config = [];           // результирующий массив данных конфигурации
     
-    /**
-     * Единственный экземпляр конфигурации
-     * @return \core\base\Config 
-     */
-    public static function getInstance(): Config 
-    {
-        if (null === static::$instance) {
-            static::$instance = new static();
-        }
-        return static::$instance;
-    }
-
+    private $root;                  // корень приложения в файловой системе
+    
     public function getDefaultConfigArray() {return $this->default_config; }
     public function getAppConfigArray() { return $this->app_config; }
     public function getConfigArray() { return $this->config; }
-
-     /**
-     * Делаем недоступным создание, клонирование или создание через десериализацию
-     */
-    private function __construct() {}
-    private function __clone() {}
-    private function __wakeup() {}
     
+    /**
+     * корень приложения в файловой системе
+     * @return type
+     */
+    public function getRoot() { return $this->root; }
+     
     /**
      * Настраиваем конфигурацию в соответствии с установками в json-файле конфигурации приложения
      * @param string $app_config_file  Файл json с конфигурационными параметрами приложения.
      */
     public function Init(string $app_root, string $app_config_file = "") 
     {
+        $this->root = $app_root;
+        
         // считываем конфигурацию по умолчанию
         $file = $app_root . '/core/config_default.json';
         if (!file_exists($file)) {

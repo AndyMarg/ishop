@@ -1,3 +1,18 @@
 {
+    "email": {
+        "admin": "Andrey.Margashov@yandex.ru"
+    },
+    "smtp": {
+        "login": "",
+        "password": ""
+    },
+    "site": {
+        "shop_name": "Интернет-магазин"
+    },
+    "interface": {
+        "pagination": {
+            "rows_on_page": 3
+        }
+    }
 }
 

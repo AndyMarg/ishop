@@ -13,6 +13,13 @@
         "views": "/app/views",
         "widgets": "/app/widgets"
     },
+    "errors": {
+        "log": "/logs/errors/errors.log",
+        "pages": {
+            "page404": "/public/errors/404.php",
+            "page_common": "/public/errors/common.html"
+        }
+    },
     "uri": {
         "admin": "/admin"
     },
