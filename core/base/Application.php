@@ -2,11 +2,15 @@
 
 namespace core\base;
 
+use core\libs\Utils;
+
 /**
  * Класс приложения.
  * Только статические методы.
  */
 class Application {
+    
+    private static $router;
 
     /**
      * Вернуть объект конфигурации приложения
@@ -21,10 +25,18 @@ class Application {
      * Вернуть URL корня приложения
      * @return type string 
      */
-    public static function getRootURL() {
-        return 'http://' . filter_input(INPUT_SERVER, 'SERVER_NAME');
+    public static function getRootURL() { 
+        return 'http://' . filter_input(INPUT_SERVER, 'SERVER_NAME');  
     }
-
+    
+    /**
+     * Вернуть объект роутера
+     * @return type object Router
+     */
+    public static function getRouter() { 
+        return self::$router; 
+    }
+    
     /**
      * Инициализирует приложение.
      * 
@@ -41,6 +53,12 @@ class Application {
         
         // стартуем сессию
         session_start();
+
+        // инициализируем роутер
+        self::$router = Router::getInstance();
+        self::$router->Init();
+        // передаем запрос на обработку маршрутизатору
+        self::$router->dispatch(Utils::getUrl());
     }
     
 } 

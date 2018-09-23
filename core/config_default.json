@@ -7,6 +7,7 @@
         "libs": "/core/libs",
         "cache": "/tmp/cache",
         "config": "/config",
+        "admin": "/admin",
         "app": "/app",
         "controllers": "/app/controllers",
         "models": "/app/models",
@@ -20,10 +21,23 @@
             "page_common": "/public/errors/common.html"
         }
     },
-    "uri": {
-        "admin": "/admin"
+    "admin": {
+        "uri": "admin"
     },
     "defaults": {
         "layout": "default"
+    },
+    "routes": {
+        "default": {
+            "base": {
+                "regexp": "^$",
+                "controller": "Main",
+                "action": "index"
+            },
+            "dynamic": {
+                "regexp": "^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$"
+            }
+        }
     }
+    
 }
