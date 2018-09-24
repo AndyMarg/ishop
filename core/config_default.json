@@ -35,7 +35,8 @@
                 "action": "index"
             },
             "dynamic": {
-                "regexp": "^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$"
+                "regexp": "^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$",
+                "action": "index"
             }
         }
     }
