@@ -43,19 +43,32 @@ class Router {
         // добавить маршруты админки 
         // (перед маршрутами приложения по умолчанию, так как регулярка более специфичная)
         $admin_uri = Application::getConfig()->admin->uri;
-        $this->add(substr_replace($path_base->regexp, $admin_uri , 1, 0), ["controller" => $path_base->controller, "action" => $path_base->action]);
-        $this->add(substr_replace($path_dyn->regexp, $admin_uri . '/', 1, 0));
+        $this->add(substr_replace($path_base->regexp, $admin_uri , 1, 0), 
+                ["controller" => $path_base->controller, "action" => $path_base->action, "admin" => true]);
+        $this->add(substr_replace($path_dyn->regexp, $admin_uri . '/', 1, 0), ["admin" => true]);
         // добавить маршруты приложения
         $this->add($path_base->regexp, ["controller" => $path_base->controller, "action" => $path_base->action]);
         $this->add($path_dyn->regexp);
     }
     
-    
     public function dispatch($uri) {
+        $config = Application::getConfig();
         if ($this->matchRoute($uri)) {
-            echo 'Match found !!!!';
+            $adminPathPrefix = (isset($this->route['admin'])) ? $config->dirs->admin : '';
+            $controllerClass = str_replace('/', '\\', $config->dirs->controllers . $adminPathPrefix . '/' .  $this->route['controller'] . 'Controller');
+            if (class_exists($controllerClass)) {
+                $controller = new $controllerClass($this->route);
+                $action = $this->route['action'] . 'Action';
+                if (method_exists($controller, $action)) {
+                    $controller->$action();
+                } else {
+                    throw new \Exception("Метод не найден: {$controllerClass}::{$action}", 500);
+                }
+            } else {
+                throw new \Exception("Контроллер не найден: {$controllerClass}", 500);
+            }
         } else {
-            echo 'Match not found (((';
+            throw new \Exception("Страница не найдена", 404);
         }
     }
     
@@ -78,10 +91,25 @@ class Router {
                 if (!array_key_exists('action', $route)) {
                     $route['action'] = Application::getConfig()->routes->default->dynamic->action;
                 }
+                $route['controller'] = $this->toCamelCase($route['controller']);
+                $route['action'] = $this->toCamelCase($route['action'], true);
                 $this->route = $route;
                 return true;
             }
         }
         return false;
     }
+    
+    /**
+     * Перевод строки, разделенной "-" в CamelCase с удалением "-" 
+     * @param string $name
+     * @param bool $firstCharLower Если true - первый символ в нижнем регистре
+     * @return type string
+     */
+    private function toCamelCase(string $name, bool $firstCharLower = false) {
+        $result = str_replace('-', '', ucwords($name, '-'));
+        $result = ($firstCharLower) ? lcfirst($result) : $result;
+        return $result;
+    }
+    
 }
