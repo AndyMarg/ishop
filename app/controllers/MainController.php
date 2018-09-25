@@ -14,6 +14,6 @@ class MainController extends AppController {
     }
     
     public function indexAction() {
-        var_dump(__METHOD__);
+        
     }
 }

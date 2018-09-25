@@ -9,6 +9,9 @@ abstract class Controller {
     
     // маршрут к контроллеру
     private $route;
+    // текущее представление
+    //private $view;
+    
     public function __construct($route) {
         $this->route = $route;
     }
