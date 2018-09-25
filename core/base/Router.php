@@ -51,6 +51,11 @@ class Router {
         $this->add($path_dyn->regexp);
     }
     
+    /**
+     * Деспетчиризуем url на вызов метода контроллера
+     * @param type $uri
+     * @throws \Exception
+     */
     public function dispatch($uri) {
         $config = Application::getConfig();
         if ($this->matchRoute($uri)) {

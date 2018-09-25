@@ -2,12 +2,16 @@
 
 namespace app\controllers;
 
-use core\base\Controller;
+use app\controllers\AppController;
 
 /**
  * Контроллер по умолчанию
  */
-class MainController extends Controller {
+class MainController extends AppController {
+    
+    public function __construct($route) {
+        parent::__construct($route);
+    }
     
     public function indexAction() {
         var_dump(__METHOD__);
