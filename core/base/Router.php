@@ -63,12 +63,7 @@ class Router {
             $controllerClass = str_replace('/', '\\', $config->dirs->controllers . $adminPathPrefix . '/' .  $this->route['controller'] . 'Controller');
             if (class_exists($controllerClass)) {
                 $controller = new $controllerClass($this->route);
-                $action = $this->route['action'] . 'Action';
-                if (method_exists($controller, $action)) {
-                    $controller->$action();
-                } else {
-                    throw new \Exception("Метод не найден: {$controllerClass}::{$action}", 500);
-                }
+                $controller->dispatch();
             } else {
                 throw new \Exception("Контроллер не найден: {$controllerClass}", 500);
             }

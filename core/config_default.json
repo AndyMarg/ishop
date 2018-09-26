@@ -12,6 +12,7 @@
         "controllers": "/app/controllers",
         "models": "/app/models",
         "views": "/app/views",
+        "layouts": "/app/views/layouts",
         "widgets": "/app/widgets"
     },
     "errors": {
@@ -25,7 +26,12 @@
         "uri": "admin"
     },
     "defaults": {
-        "layout": "default"
+        "layout": "default",
+        "meta": {
+            "title": "Интернет-магазин",
+            "description": "Интернет-магазин",
+            "keywords": "Интернет-магазин"
+        }
     },
     "routes": {
         "default": {

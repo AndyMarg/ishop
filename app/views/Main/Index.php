@@ -1,10 +1,1 @@
-<?php
-
-namespace app\views\main;
-
-/**
- * Действие по умолчанию для контроллера по умолчанию
- */
-class Index {
-    //put your code here
-}
+<h1>Main::index.php</h1>
