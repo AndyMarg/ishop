@@ -7,7 +7,9 @@
         "password": ""
     },
     "site": {
-        "shop_name": "Интернет-магазин"
+        "shop_name": "Интернет-магазин чего-то там...",
+        "description": "Очень клевый магазинчик",
+        "keywords": "всякая фигня"
     },
     "interface": {
         "pagination": {

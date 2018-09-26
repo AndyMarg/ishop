@@ -51,23 +51,30 @@ class View {
      * @param string $decription
      * @param string $keywords
      */
-    public function setMeta(string $title = '', string $decription = '', string $keywords = '') {
+    public function setMeta(string $title = '', string $description = '', string $keywords = '') {
         $this->meta['title'] = $title;
-        $this->meta['description'] = $decription;
+        $this->meta['description'] = $description;
         $this->meta['keywords'] = $keywords;
     }
     
+    /**
+     * Ренденрим html-разметку для представления
+     * @throws \Exception
+     */
     public function render() {
+        // распаковать элементы массивав переменные
+        if (!empty($this->data)) {
+            extract($this->data);
+        }
+        // получить контент представления
         $file = $this->getViewFilePath();
         if (is_file($file)) {
-            // получить контент представления
             ob_start();
             require $file;
             $content = ob_get_clean();
             // получить контент шаблона html
             if (false !== $this->layout) {
                 $file = $this->getLyaoutFilePath();
-                //var_dump($this->getMetaHtml());
                 if (is_file($file)) {
                     require $file;
                 } else {
@@ -104,10 +111,10 @@ class View {
      * Возвращает html-разметку метаданных
      * @return type
      */
-    private function getMetaHtml() {
+    private function getMetaHtml()   {
         return 
-            "<title>{$this->meta['title']}</title>\n" .
-            "<meta name=\"description\" content=\"{$this->meta['decription']}\">\n" . 
-            "<meta name=\"keywords\" content=\"{$this->meta['keywords']}\">\n";
+            "<title>{$this->meta['title']}</title>" . PHP_EOL .
+            "<meta name=\"description\" content=\"{$this->meta['description']}\">" . PHP_EOL .
+            "<meta name=\"keywords\" content=\"{$this->meta['keywords']}\">\n" . PHP_EOL;
     }
 }
