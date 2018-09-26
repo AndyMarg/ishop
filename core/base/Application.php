@@ -11,6 +11,7 @@ use core\libs\Utils;
 class Application {
     
     private static $router;
+    private static $db;
 
     /**
      * Вернуть объект конфигурации приложения
@@ -29,6 +30,14 @@ class Application {
         return 'http://' . filter_input(INPUT_SERVER, 'SERVER_NAME');  
     }
     
+    /**
+     * Вернуть объект менеджера БД
+     * @return type string 
+     */
+    public static function getDb() { 
+        return self::$db;  
+    }
+
     /**
      * Вернуть объект роутера
      * @return type object Router
@@ -54,6 +63,10 @@ class Application {
         // стартуем сессию
         session_start();
 
+        // подключаемся к базе
+        self::$db = Db::getInstance();
+        self::$db->Init();
+        
         // инициализируем роутер
         self::$router = Router::getInstance();
         self::$router->Init();

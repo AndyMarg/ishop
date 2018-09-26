@@ -15,6 +15,12 @@
         "pagination": {
             "rows_on_page": 3
         }
+    },
+    "db": {
+       "dsn": "mysql:host=localhost;dbname=ishop;charset=utf8",
+       "user": "root",
+       "pass": "letmedoit"
     }
+
 }
 

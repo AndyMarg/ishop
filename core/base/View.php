@@ -48,7 +48,7 @@ class View {
     /**
      * Установить метаданные
      * @param string $title
-     * @param string $decription
+     * @param string $description
      * @param string $keywords
      */
     public function setMeta(string $title = '', string $description = '', string $keywords = '') {
@@ -92,8 +92,8 @@ class View {
      */
     private function getViewFilePath() {
         $config = Application::getConfig();
-        $adminPathPrefix = $this->controller->isAdmin() ? $config->dirs->admin : '';
-        return  Utils::getRoot() . $config->dirs->views . '/' . $adminPathPrefix . '/' . 
+        $adminPathPrefix = $this->controller->isAdmin() ? $config->dirs->admin . '/' : '';
+        return  Utils::getRoot() . $config->dirs->views . '/' . $adminPathPrefix . 
                 $this->controller->getControllerName() . '/' . 
                 $this->controller->getActionName() . '.php';
     }

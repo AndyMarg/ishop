@@ -45,6 +45,11 @@
                 "action": "index"
             }
         }
+    },
+    "db": {
+       "dsn": "",
+       "user": "",
+       "pass": ""
     }
     
 }
