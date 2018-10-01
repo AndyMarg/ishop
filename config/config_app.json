@@ -21,6 +21,9 @@
        "user": "root",
        "pass": "letmedoit",
         "debug": false
+    },
+    "defaults": {
+        "layout": "watches"
     }
 
 }
