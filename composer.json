@@ -6,7 +6,8 @@
         "psr-4": {
             "core\\": "core",
             "app\\": "app",
-            "tests\\": "tests"
+            "tests\\": "tests",
+            "vendor\\": "vendor"
         }
     },
     "require": {},

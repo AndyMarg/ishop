@@ -5,8 +5,8 @@ namespace core\base;
 /**
  * Абстрактный класс модели
  */
-class Model {
-    
+abstract class Model {
+
     // поля данных (вероятно из базы)
     private $attributes = [];
     // ошибки
