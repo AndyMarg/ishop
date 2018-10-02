@@ -12,6 +12,7 @@ class Application {
     
     private static $router;
     private static $db;
+    private static $storage;
 
     /**
      * Вернуть объект конфигурации приложения
@@ -28,6 +29,14 @@ class Application {
      */
     public static function getRootURL() { 
         return 'http://' . filter_input(INPUT_SERVER, 'SERVER_NAME');  
+    }
+    
+    /**
+     * Вернуть объект хранилища
+     * @return type
+     */
+    public static function getStorage() {
+        return Storage::getInstance();
     }
     
     /**

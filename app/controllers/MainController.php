@@ -20,5 +20,9 @@ class MainController extends AppController {
         $brands = \R::find('brand', 'limit 3');
         $hits = \R::find('product', "hit = '1' and status = '1' limit 8");
         $this->getView()->setData(compact('brands', 'hits'));
+        
+        //new \app\widgets\currency\Currency();
+        var_dump(Application::getStorage()->get('currencies'));
+        var_dump(\app\widgets\currency\Currency::getCurrencies());
     }
 }
