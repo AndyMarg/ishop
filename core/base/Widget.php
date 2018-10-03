@@ -34,5 +34,21 @@ abstract class Widget {
         return $this->tpl;
     }
     
-    abstract protected function  run();
+     /**
+      * Виртуальный метод. Исполнение виджета
+      */
+    protected function  run() {
+       echo $this->getHtml(); 
+    }
+    
+    /**
+     * Возвращаем html шаблон виджета
+     * @return type
+     */
+    private function getHtml() {
+        ob_start();
+        require_once $this->getTpl();
+        return ob_get_clean();
+     }
+
 }

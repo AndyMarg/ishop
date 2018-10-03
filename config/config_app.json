@@ -1,4 +1,7 @@
 {
+    "dirs": {
+        "root": "ishop"
+    },
     "email": {
         "admin": "Andrey.Margashov@yandex.ru"
     },

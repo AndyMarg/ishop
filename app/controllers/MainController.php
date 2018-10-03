@@ -22,7 +22,5 @@ class MainController extends AppController {
         $this->getView()->setData(compact('brands', 'hits'));
         
         //new \app\widgets\currency\Currency();
-        var_dump(Application::getStorage()->get('currencies'));
-        var_dump(\app\widgets\currency\Currency::getCurrencies());
     }
 }

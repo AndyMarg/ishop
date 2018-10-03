@@ -2,6 +2,8 @@
 
 namespace core\libs;
 
+use core\base\Application;
+
 /**
  * Служебные методы
  *
@@ -34,5 +36,16 @@ class Utils {
      */
     public static function getQueryString() {
         return filter_input(INPUT_SERVER, 'QUERY_STRING');
+    }
+    
+    public static function redirect($url = false) {
+        if ($url) {
+            $redirect = $url;
+        } else {
+            $referer = filter_input(INPUT_SERVER, 'HTTP_REFERER');
+            $redirect = isset($referer) ? filter_input(INPUT_SERVER, 'HTTP_REFERER') : Application::getConfig()->dirs->root . '/';
+        }
+        header("Location: $redirect");
+        exit;
     }
 }
