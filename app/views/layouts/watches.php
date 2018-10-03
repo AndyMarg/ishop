@@ -59,6 +59,7 @@
             <div class="container">
                 <div class="header">
                     <div class="col-md-9 header-left">
+<!--
                         <div class="top-nav">
                             <ul class="memenu skyblue">
                                 <li class="active"><a href="index.html">Home</a></li>
@@ -197,7 +198,8 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="clearfix"> </div>
+                        -->
+                       <div class="clearfix"> </div>
                     </div>
                     <div class="col-md-3 header-right"> 
                         <div class="search-bar">
