@@ -42,6 +42,7 @@ class Cache {
                 return $content['data'];
             } else { 
                 unlink($file);
+                return false;;
             }
         } else {
             return false;

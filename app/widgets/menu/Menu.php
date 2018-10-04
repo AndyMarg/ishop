@@ -9,8 +9,8 @@ use core\base\Widget;
  */
 class Menu extends Widget {
     
-    public function __construct() {
-        parent::__construct('menu');
+    public function __construct($options = []) {
+        parent::__construct('menu', $options);
     }
 
     

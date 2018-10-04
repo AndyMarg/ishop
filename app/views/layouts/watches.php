@@ -60,6 +60,12 @@
             <div class="container">
                 <div class="header">
                     <div class="col-md-9 header-left">
+                        <?php 
+                            $menu = new app\widgets\menu\Menu([
+                                'table' => 'category',
+                                'cachePeriod' => 180
+                            ]); 
+                        ?>
 <!--
                         <div class="top-nav">
                             <ul class="memenu skyblue">

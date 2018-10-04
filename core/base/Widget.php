@@ -9,9 +9,11 @@ use core\libs\Utils;
  */
 abstract class Widget {
    
-    private $tpl;
     private $name;
+    private $tpl;
     private $js;
+    
+    // передаются через массив options
     private $table;
     private $containerTag = 'ul';
     private $cachePeriod = false;
@@ -19,13 +21,17 @@ abstract class Widget {
     /**
      * Конструктор
      * @param string $name Имя виджета
-     * @param string $table Таблица с данными виджета. 
      */
-    public function __construct(string $name, string $table = null) {
+    public function __construct(string $name, $options = []) {
         $this->name = $name;
-        if ($table) { $this->table = $table; }
         $this->tpl = Utils::getRoot() . str_replace('{widget}', $name,  Application::getConfig()->dirs->widget_tpls) . '/'.  $name . '.tpl.php';
         $this->js =  Utils::getRoot() . str_replace('{widget}', $name,  Application::getConfig()->dirs->widget_scripts) . '/'.  $name . '.js';
+        // устанавливаем атрибуты объекта
+        foreach ($options as $key => $value) {
+            if (key_exists($key, get_object_vars($this))) {
+                $this->$key = $value;
+            }
+        }
         $this->run();
     }
     
@@ -37,47 +43,7 @@ abstract class Widget {
         return $this->name;
     }
     
-    /**
-     * Возвращает файл шаблона виджета
-     * @return type
-     */
-    public function getTpl() {
-        return $this->tpl;
-    }
-    
-    /**
-     * Возвращает файл js виджета
-     * @return type
-     */
-    public function getJs() {
-        return $this->js;
-    }
-    
-    /**
-     * Установить html тэг, который будет служить контейнером для html шаблона
-     * @param string $containerTag
-     */
-    public function setContainerTag(string $containerTag) {
-        $this->containerTag = $containerTag;
-    }
-    
-    /**
-     * Получить период кэширования html контента виджета
-     * @return type
-     */
-    public function getCachePeriod() {
-        return $this->cachePeriod;
-    }
-
-    /**
-     * Установить период кэширования html контента виджета
-     * @param type $cachePeriod
-     */
-    public function setCachePeriod($cachePeriod) {
-        $this->cachePeriod = $cachePeriod;
-    }
-            
-     /**
+   /**
       * Виртуальный метод. Исполнение виджета
       */
     protected function  run() {
@@ -94,12 +60,12 @@ abstract class Widget {
         if (!$content) {
             ob_start();
             // подключаем шаблон виджета
-            require_once $this->getTpl();
+            require_once $this->tpl;
             //  подключаем скрипты виджета
-            $file = $this->getJs();
+            $file = $this->js;
             if (is_file($file)) { 
                 echo "<script>\n";
-                require_once $this->getJs();
+                require_once $file;
                 echo "</script>\n";
             }   
             $content = ob_get_clean();
@@ -113,7 +79,8 @@ abstract class Widget {
       * @return mixed
       */
      private function htmlFromCache() {
-         return false;
+         $content = Cache::load('widget_' . $this->name);
+         return $content;
      }
      
      /**
@@ -121,6 +88,9 @@ abstract class Widget {
       * @param string $content
       */
      private function htmlToCache(string $content) {
-         if (!$this->cachePeriod) return;
+         if ($this->cachePeriod) {
+             Cache::save('widget_' . $this->name, $content, $this->cachePeriod);
+         }
      }
+     
 }
