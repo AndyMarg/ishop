@@ -1,7 +1,8 @@
 <?php
 
-namespace app\controllers;
+namespace app\widgets\currency\controllers;
 
+use app\controllers\AppController;
 use core\libs\Utils;
 
 /**
@@ -9,6 +10,9 @@ use core\libs\Utils;
  */
 class CurrencyController extends AppController {
     
+    /**
+     * Записываем куку с выбранной валютой и редиректим на главную страницу
+     */
     public function changeAction() {
         $currency =  filter_input(INPUT_GET, 'currency');
         if (!empty($currency)) {

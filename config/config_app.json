@@ -27,7 +27,8 @@
     },
     "defaults": {
         "layout": "watches"
-    }
+    },
+    "widgets": ["currency"]
 
 }
 

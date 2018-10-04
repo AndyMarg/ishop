@@ -42,4 +42,11 @@ class ArrayAsObject {
         unset($this->array[$property]);
     }
     
+    /**
+     * Возвращает исходный массив данных
+     */
+    public function asArray() {
+        return $this->array;
+    }
+    
 }

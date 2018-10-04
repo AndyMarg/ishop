@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Luxury Watches A Ecommerce Category Flat Bootstrap Resposive Website Template | Home :: w3layouts</title>
+        <script src="js/jquery-1.11.0.min.js"></script>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
         <!--theme-style-->
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
@@ -283,7 +284,6 @@
         <!--footer-end-->	
         
         <!--scripts-->
-        <script src="js/jquery-1.11.0.min.js"></script>
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!--start-menu-->
         <script src="js/simpleCart.min.js"></script>
@@ -314,7 +314,6 @@
             });
         </script>
         <!--End-slider-script-->
-        <script src="js/main.js"></script>
 
     </body>
 </html>

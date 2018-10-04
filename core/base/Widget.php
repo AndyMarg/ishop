@@ -11,10 +11,12 @@ abstract class Widget {
    
     private $tpl;
     private $name;
-    
+    private $js;
+        
     public function __construct($name) {
         $this->name = $name;
-        $this->tpl = Utils::getRoot() . Application::getConfig()->dirs->widgets . '/' . $name . '/tpl/' . $name . '.tpl.php';
+        $this->tpl = Utils::getRoot() . str_replace('{widget}', $name,  Application::getConfig()->dirs->widget_tpls) . '/'.  $name . '.tpl.php';
+        $this->js =  Utils::getRoot() . str_replace('{widget}', $name,  Application::getConfig()->dirs->widget_scripts) . '/'.  $name . '.js';
         $this->run();
     }
     
@@ -34,6 +36,14 @@ abstract class Widget {
         return $this->tpl;
     }
     
+    /**
+     * Возвращает файл js виджета
+     * @return type
+     */
+    public function getJs() {
+        return $this->js;
+    }
+    
      /**
       * Виртуальный метод. Исполнение виджета
       */
@@ -47,8 +57,15 @@ abstract class Widget {
      */
     private function getHtml() {
         ob_start();
+        // подключаем шаблон виджета
         require_once $this->getTpl();
+        //  подключаем скрипты виджета
+        $file = $this->getJs();
+        if (is_file($file)) { 
+            echo "<script>\n";
+            require_once $this->getJs();
+            echo "</script>\n";
+        }    
         return ob_get_clean();
      }
-
 }

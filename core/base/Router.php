@@ -60,7 +60,11 @@ class Router {
         $config = Application::getConfig();
         if ($this->matchRoute($uri)) {
             $adminPathPrefix = (isset($this->route['admin'])) ? $config->dirs->admin : '';
-            $controllerClass = str_replace('/', '\\', $config->dirs->controllers . $adminPathPrefix . '/' .  $this->route['controller'] . 'Controller');
+            // путь к контроллеру
+            $controllerPath = $this->isWidget($this->route['controller']) ?
+                    str_replace('{widget}', lcfirst($this->route['controller']), $config->dirs->widget_controllers) :
+                    $config->dirs->controllers;
+            $controllerClass = str_replace('/', '\\', $controllerPath . $adminPathPrefix . '/' .  $this->route['controller'] . 'Controller');
             if (class_exists($controllerClass)) {
                 $controller = new $controllerClass($this->route);
                 $controller->dispatch();
@@ -110,6 +114,15 @@ class Router {
         $result = str_replace('-', '', ucwords($name, '-'));
         $result = ($firstCharLower) ? lcfirst($result) : $result;
         return $result;
+    }
+    
+    /**
+     * True, если это контроллер виджета
+     * @param type $controller
+     * @return type
+     */
+    private function isWidget($controller) {
+        return in_array(strtolower($controller), Application::getConfig()->widgets->asArray());
     }
     
 }
