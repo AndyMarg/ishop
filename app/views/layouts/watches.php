@@ -61,10 +61,10 @@
                 <div class="header">
                     <div class="col-md-9 header-left">
                         <?php 
-                            $menu = new app\widgets\menu\Menu([
-                                'table' => 'category',
-                                'cachePeriod' => 180
-                            ]); 
+//                            $menu = new app\widgets\menu\Menu([
+//                                'table' => 'category',
+//                                'cachePeriod' => 180
+//                            ]); 
                         ?>
 <!--
                         <div class="top-nav">
@@ -222,6 +222,7 @@
         </div>
         <!--bottom-header-->
 
+        <?php //var_dump(\core\base\Application::getStorage()->get('currencies_')); ?>
         <?= $content; ?>
 
         <!--information-starts-->
@@ -274,9 +275,8 @@
             <div class="container">
                 <div class="footer-top">
                     <div class="col-md-6 footer-left">
-                        <form>= '') {
-                                        this.value = 'Enter Your Email';
-                                    }">
+                        <form>
+                            <input type="text" value="Enter Your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Your Email';}">
                             <input type="submit" value="Subscribe">
                         </form>
                     </div>

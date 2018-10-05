@@ -10,23 +10,20 @@ use core\base\Widget;
  */
 class Currency extends Widget{
     
-    public $currencies;
-    public $currency;
-    
      public function __construct() {
-         parent::__construct('currency');
+        parent::__construct('currency');
      }
      
      /**
       * Виртуальный метод. Исполнение виджета
       */
     protected function run() {
-        $this->currencies = self::getCurrencies();
-        $this->currency = self::getCurrency();
+        $this->setAttribute(['name' => 'currencies', 'value' => self::getCurrencies(), 'save' => true]);
+        $this->setAttribute(['name' => 'currency', 'value' => self::getCurrency()]);
         parent::run();
      }
      
-     /**
+    /**
       * Возвращает текущую валюту
       */
      public static function getCurrency() {

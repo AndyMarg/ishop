@@ -2,6 +2,7 @@
 
 namespace core\base;
 
+use core\libs\Attribute;
 use core\libs\Utils;
 
 /**
@@ -12,7 +13,8 @@ abstract class Widget {
     private $name;
     private $tpl;
     private $js;
-    
+    private $attributes = [];
+            
     // передаются через массив options
     private $table;
     private $containerTag = 'ul';
@@ -43,7 +45,24 @@ abstract class Widget {
         return $this->name;
     }
     
-   /**
+    /**
+     * Устанавливаем значение аттрибута
+     * @param array $opts
+     */
+    protected function setAttribute(array $opts) {
+        $this->attributes[$opts['name']] = new Attribute($opts);
+    }
+
+    /**
+     * Возвращаем значение аттрибута
+     * @param type $name
+     * @return type
+     */    
+    protected function getAttribute($name) {
+        return $this->attributes[$name];
+    }
+    
+    /**
       * Виртуальный метод. Исполнение виджета
       */
     protected function  run() {
@@ -55,6 +74,11 @@ abstract class Widget {
      * @return type
      */
     private function getHtml() {
+        // сформировать локальные переменные (с именами аттрибутов) из массива атрибутов
+        foreach ($this->attributes as $name => $ttribute) {
+            $$name = $ttribute->getValue();
+        }
+        // получить контент из кэша
         $content = $this->htmlFromCache();
         // в кэше ничего нет - формируем снова
         if (!$content) {
