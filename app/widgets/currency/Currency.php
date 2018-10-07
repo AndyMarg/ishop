@@ -2,7 +2,7 @@
 
 namespace app\widgets\currency;
 
-use core\base\Application;
+use app\models\CurrencyModel;
 use core\base\Widget;
 
 /**
@@ -18,41 +18,11 @@ class Currency extends Widget{
       * Виртуальный метод. Исполнение виджета
       */
     protected function run() {
-        $this->setAttribute(['name' => 'currencies', 'value' => self::getCurrencies(), 'save' => true]);
-        $this->setAttribute(['name' => 'currency', 'value' => self::getCurrency()]);
+        $model = new CurrencyModel();
+        $currencies = $model->getCurrencies();
+        $currency = $model->getCurrency();
+        $this->setData(compact('currencies', 'currency'));
         parent::run();
-     }
-     
-    /**
-      * Возвращает текущую валюту
-      */
-     public static function getCurrency() {
-         $currencies = self::getCurrencies();
-         $currency_name = filter_input(INPUT_COOKIE, 'currency');
-         if (isset($currency_name) && key_exists($currency_name, $currencies)) {
-             // получить код валюты из куки
-             $code = $currency_name;
-         } else {
-            // получить код валюты из текущего ключа массива валют (отсортирован по базовой валюте)
-            $code = key($currencies);    
-         }
-         $currency = $currencies[$code];
-         $currency['code'] = $code;
-         return $currency;
-    }
-     
-     /**
-      * Возвращает массив валют.
-      * @return type
-      */
-     public static function getCurrencies() {
-         $currencies = Application::getStorage()->get('currencies');
-         if (!$currencies) {
-            $sql = 'select code, title, symbol_left, symbol_right, value, base from currency order by base desc';
-            $currencies = \R::getAssoc($sql);
-            Application::getStorage()->set('currencies', $currencies);
-         }
-         return $currencies;
      }
      
 }

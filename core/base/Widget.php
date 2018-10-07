@@ -2,7 +2,6 @@
 
 namespace core\base;
 
-use core\libs\Attribute;
 use core\libs\Utils;
 
 /**
@@ -13,11 +12,9 @@ abstract class Widget {
     private $name;
     private $tpl;
     private $js;
-    private $attributes = [];
+    private $data = [];
             
-    // передаются через массив options
-    private $table;
-    private $containerTag = 'ul';
+    private $cache_key_prefix = 'widget';
     private $cachePeriod = false;
         
     /**
@@ -46,22 +43,21 @@ abstract class Widget {
     }
     
     /**
-     * Устанавливаем значение аттрибута
-     * @param array $opts
+     * Установить данные для виджета
+     * @param type $data
      */
-    protected function setAttribute(array $opts) {
-        $this->attributes[$opts['name']] = new Attribute($opts);
+    protected function setData($data) {
+        $this->data = $data;
     }
 
     /**
-     * Возвращаем значение аттрибута
-     * @param type $name
-     * @return type
-     */    
-    protected function getAttribute($name) {
-        return $this->attributes[$name];
+     * Получить данные для виджета
+     * @param type $data
+     */
+    protected function getData() {
+        return $this->data;
     }
-    
+
     /**
       * Виртуальный метод. Исполнение виджета
       */
@@ -70,21 +66,30 @@ abstract class Widget {
     }
     
     /**
+     * Выводит в поток вывода шаблон виджета.
+     * Может быть перекрыт в наследниках.
+     */
+    protected function outputTemplate() {
+        // сформировать локальные переменные
+        extract($this->getData());
+        require_once $this->tpl; 
+    }
+
+
+    /**
      * Возвращаем html разметку виджета
      * @return type
      */
     private function getHtml() {
-        // сформировать локальные переменные (с именами аттрибутов) из массива атрибутов
-        foreach ($this->attributes as $name => $ttribute) {
-            $$name = $ttribute->getValue();
-        }
+        // сформировать локальные переменные
+        extract($this->getData());
         // получить контент из кэша
-        $content = $this->htmlFromCache();
+        $content = $this->htmlFromCache(); 
         // в кэше ничего нет - формируем снова
         if (!$content) {
             ob_start();
             // подключаем шаблон виджета
-            require_once $this->tpl;
+            $this->outputTemplate();
             //  подключаем скрипты виджета
             $file = $this->js;
             if (is_file($file)) { 
@@ -113,7 +118,7 @@ abstract class Widget {
       */
      private function htmlToCache(string $content) {
          if ($this->cachePeriod) {
-             Cache::save('widget_' . $this->name, $content, $this->cachePeriod);
+             Cache::save($this->cache_key_prefix . '_' . $this->name, $content, $this->cachePeriod);
          }
      }
      

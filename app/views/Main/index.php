@@ -25,10 +25,10 @@
                 <?php foreach ($brands as $brand): ?>
                     <div class="col-md-4 about-left">
                         <figure class="effect-bubba">
-                            <img class="img-responsive" src="images/<?= $brand->img ?>" alt=""/>
+                            <img class="img-responsive" src="images/<?= $brand['img'] ?>" alt=""/>
                             <figcaption>
-                                <h2><?= $brand->title ?></h2>
-                                <p><?= $brand->description ?></p>	
+                                <h2><?= $brand['title'] ?></h2>
+                                <p><?= $brand['description'] ?></p>	
                             </figcaption>			
                         </figure>
                     </div>
@@ -42,33 +42,33 @@
 
 <!--product-starts-->
 <?php if ($hits): ?>
-    <?php $currency = app\widgets\currency\Currency::getCurrency(); ?>
+    <?php $currency = (new \app\models\CurrencyModel())->getCurrency(); ?>
     <div class="product"> 
         <div class="container">
             <div class="product-top">
                 <div class="product-one">
-                    <?php foreach ($hits as $hit): ?>
+                    <?php foreach ($hits as $id => $hit): ?>
                         <div class="col-md-3 product-left">
                             <div class="product-main simpleCart_shelfItem">
-                                <a href="product/<?= $hit->alias; ?>" class="mask"><img class="img-responsive zoom-img" src="images/<?= $hit->img; ?>" alt="" /></a>
+                                <a href="product/<?= $hit['alias']; ?>" class="mask"><img class="img-responsive zoom-img" src="images/<?= $hit['img']; ?>" alt="" /></a>
                                 <div class="product-bottom">
-                                    <h3><a href="product/<?= $hit->alias; ?>"><?= $hit->title; ?></a></h3>
+                                    <h3><a href="product/<?= $hit['alias']; ?>"><?= $hit['title']; ?></a></h3>
                                     <p>Explore Now</p>
                                     <h4>
-                                        <a class="add-to-cart-link" href="cart/add/?id=<?= $hit->id; ?>"><i></i></a> 
+                                        <a class="add-to-cart-link" href="cart/add/?id=<?= $id; ?>"><i></i></a> 
                                         <span class="item_price">
                                             <?= $currency['symbol_left']; ?> 
-                                            <?= $hit->price * $currency['value']; ?>
+                                            <?= $hit['price'] * $currency['value']; ?>
                                             <?= $currency['symbol_right']; ?> 
                                         </span>
-                                        <?php if ($hit->old_price): ?>
-                                            <small><del><?= $hit->old_price * $currency['value']; ?></del></small>
+                                        <?php if ($hit['old_price']): ?>
+                                            <small><del><?= $hit['old_price'] * $currency['value']; ?></del></small>
                                         <?php endif; ?>
                                     </h4>
                                 </div>
                                 <div class="srch">
-                                    <?php if ($hit->old_price): ?>
-                                        <span>-<?= 100-round(($hit->price / $hit->old_price)*100); ?>%</span>
+                                    <?php if ($hit['old_price']): ?>
+                                        <span>-<?= 100-round(($hit['price'] / $hit['old_price'])*100); ?>%</span>
                                     <?php endif; ?>
                                 </div>
                             </div>

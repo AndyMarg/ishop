@@ -21,7 +21,7 @@ class Attribute {
         if ($this->save) {
             Application::getStorage()->set($this->name, $this->value);
         }
-        // заполняем значение аттриьута из БД, если задан sql
+        // заполняем значение аттрибута из БД, если задан sql
         if (key_exists('sql', $opts)) {
             $this->getFromDB($opts['sql'], key_exists('params', $opts) ? $opts['params'] : []);
         }

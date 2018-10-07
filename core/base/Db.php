@@ -24,9 +24,11 @@ class db {
         }
         // запрещаем автоматическое изменение структуры
         \R::freeze(true);
-        // включаем возможность логирования запросов
-        if (Application::getConfig()->mode === "development") {
-            \R::Debug($config->db->debug, 1);
+        // включаем возможность отладки запросов
+        if (Application::getConfig()->mode === "development" && $config->db->debug) {
+            \R::debug(true, 2 ); //select MODE 2 to see parameters filled in
+            \R::fancyDebug();   //since 4.2
         }
+        
     }
 }

@@ -61,10 +61,12 @@
                 <div class="header">
                     <div class="col-md-9 header-left">
                         <?php 
-//                            $menu = new app\widgets\menu\Menu([
-//                                'table' => 'category',
-//                                'cachePeriod' => 180
-//                            ]); 
+                            $menu = new app\widgets\menu\Menu(
+                                (new app\models\CategoryModel())->getCategories(),        
+                                [
+                                   // 'cachePeriod' => 300
+                                ]
+                            ); 
                         ?>
 <!--
                         <div class="top-nav">
@@ -222,7 +224,6 @@
         </div>
         <!--bottom-header-->
 
-        <?php //var_dump(\core\base\Application::getStorage()->get('currencies_')); ?>
         <?= $content; ?>
 
         <!--information-starts-->
@@ -320,6 +321,7 @@
             });
         </script>
         <!--End-slider-script-->
+
 
     </body>
 </html>
