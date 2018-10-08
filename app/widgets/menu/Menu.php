@@ -11,15 +11,18 @@ class Menu extends Widget {
     
     // данные для построения иерархии меню
     private $data;
+    // данные меню в виде дерева
+    private $tree;
     // тэг контейнера
     private $containerTag  = 'ul';
     
     public function __construct($data, $options = []) {
         $this->data = $data;
+        $this->tree = $this->getTree();
         parent::__construct('menu', $options);
     }
     
-    protected function getTree() {
+    private function getTree() {
         $tree = [];
         $data = $this->data;
         foreach ($data as $id => &$node) {
@@ -30,5 +33,15 @@ class Menu extends Widget {
             }
         }
         return $tree;
+    }
+    
+    protected function outputTemplate() {
+        // сформировать локальные переменные
+        extract($this->getData());
+    }
+    
+    protected function getMenuHtml() {
+        $str = '';
+        
     }
 }

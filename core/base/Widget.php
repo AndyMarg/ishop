@@ -75,7 +75,6 @@ abstract class Widget {
         require_once $this->tpl; 
     }
 
-
     /**
      * Возвращаем html разметку виджета
      * @return type
