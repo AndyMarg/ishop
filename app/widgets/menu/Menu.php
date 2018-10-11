@@ -38,10 +38,18 @@ class Menu extends Widget {
     protected function outputTemplate() {
         // сформировать локальные переменные
         extract($this->getData());
+        //var_dump($this->tree);
+        $this->getMenuHtml($this->tree);
     }
     
-    protected function getMenuHtml() {
+    protected function getMenuHtml($tree, $tab = '') {
         $str = '';
-        
+        foreach ($tree as $id => $category) {
+            $str .= $this->catToTemplate($category, $tab, $id);
+        }
+    }
+    
+    private function catToTemplate($category, $tab, $id) {
+        return require_once $this->getTpl();
     }
 }

@@ -57,6 +57,14 @@ abstract class Widget {
     protected function getData() {
         return $this->data;
     }
+    
+    /**
+     * Возвращает путь к основному шаблону виджете
+     * @return type
+     */
+    protected function getTpl() {
+        return $this->tpl;
+    }
 
     /**
       * Виртуальный метод. Исполнение виджета
@@ -72,7 +80,7 @@ abstract class Widget {
     protected function outputTemplate() {
         // сформировать локальные переменные
         extract($this->getData());
-        require_once $this->tpl; 
+        return require_once $this->tpl; 
     }
 
     /**
