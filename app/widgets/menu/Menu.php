@@ -38,7 +38,6 @@ class Menu extends Widget {
     protected function outputTemplate() {
         // сформировать локальные переменные
         extract($this->getData());
-        //var_dump($this->tree);
         $this->getMenuHtml($this->tree);
     }
     
@@ -47,6 +46,7 @@ class Menu extends Widget {
         foreach ($tree as $id => $category) {
             $str .= $this->catToTemplate($category, $tab, $id);
         }
+        return $str;
     }
     
     private function catToTemplate($category, $tab, $id) {

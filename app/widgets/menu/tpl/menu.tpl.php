@@ -1,8 +1,8 @@
-<?php var_dump($category); ?>
-<?php $parent = isset($category['childs']); ?>
 <li>
-    <a href="category/<?=$category['alias'];?>"><?=$category['title'];?></a>
+    <a href="?id=<?=$category['id'];?>"><?=$category['title'];?></a>
     <?php if(isset($category['childs'])): ?>
-        <?=$this->getMenuHtml($category['childs']);?>
+    <ul>
+        <?= $this->getMenuHtml($category['childs']); ?>
+    </ul>   
     <?php endif; ?>
 </li>
