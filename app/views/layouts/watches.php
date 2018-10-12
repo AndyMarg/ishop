@@ -64,7 +64,7 @@
                             $menu = new app\widgets\menu\Menu(
                                 (new app\models\CategoryModel())->getCategories(),        
                                 [
-                                   // 'cachePeriod' => 300
+                                    //'cachePeriod' => 3600
                                 ]
                             ); 
                         ?>

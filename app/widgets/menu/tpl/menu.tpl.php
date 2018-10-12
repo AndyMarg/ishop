@@ -1,8 +1,8 @@
 <li>
-    <a href="?id=<?=$category['id'];?>"><?=$category['title'];?></a>
+    <a href="category/<?= $category['alias']; ?>"><?= $category['title']; ?></a>
     <?php if(isset($category['childs'])): ?>
-    <ul>
-        <?= $this->getMenuHtml($category['childs']); ?>
-    </ul>   
+        <?php echo "<{$this->containerHtmlTag}>";  ?> 
+            <?= $this->getChildsHtml($category['childs']); ?> 
+        <?php echo "</{$this->containerHtmlTag}>";  ?>  
     <?php endif; ?>
 </li>

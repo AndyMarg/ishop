@@ -14,7 +14,7 @@ class Menu extends Widget {
     // данные меню в виде дерева
     private $tree;
     // тэг контейнера
-    private $containerTag  = 'ul';
+    protected $containerHtmlTag  = 'ul';
     
     public function __construct($data, $options = []) {
         $this->data = $data;
@@ -22,6 +22,10 @@ class Menu extends Widget {
         parent::__construct('menu', $options);
     }
     
+    /**
+     * Строим иерархический массив из плоского массива
+     * @return type
+     */
     private function getTree() {
         $tree = [];
         $data = $this->data;
@@ -35,21 +39,27 @@ class Menu extends Widget {
         return $tree;
     }
     
+    /**
+     * Выводим html шаблон меню.
+     * Переопределяет метод родителя
+     */
     protected function outputTemplate() {
         // сформировать локальные переменные
         extract($this->getData());
-        $this->getMenuHtml($this->tree);
+        echo "\n<{$this->containerHtmlTag}>";
+        $this->getChildsHtml($this->tree);
+        echo "\n</{$this->containerHtmlTag}>\n";
     }
     
-    protected function getMenuHtml($tree, $tab = '') {
-        $str = '';
+    /**
+     * Выводим один уровень меню
+     * @param type $tree
+     * @param type $tab
+     */
+    protected function getChildsHtml($tree, $tab = '') {
         foreach ($tree as $id => $category) {
-            $str .= $this->catToTemplate($category, $tab, $id);
+            require $this->getTpl();
         }
-        return $str;
     }
     
-    private function catToTemplate($category, $tab, $id) {
-        return require_once $this->getTpl();
-    }
 }
