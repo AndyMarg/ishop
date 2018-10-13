@@ -15,7 +15,14 @@ class Menu extends Widget {
     private $tree;
     // тэг контейнера
     protected $containerHtmlTag  = 'ul';
-    
+    // css класс контейнера меню
+    protected $cssClass = 'menu-widget';
+    // html аттрибуты
+    protected $htmlAttributes = [];
+    // html разметка, добавленная перед выводом меню
+    protected $prependHtml;
+
+
     public function __construct($data, $options = []) {
         $this->data = $data;
         $this->tree = $this->getTree();
@@ -46,9 +53,15 @@ class Menu extends Widget {
     protected function outputTemplate() {
         // сформировать локальные переменные
         extract($this->getData());
-        echo "\n<{$this->containerHtmlTag}>";
+        // сформировать строку аттрибутов
+        $attrs = '';
+        foreach ($this->htmlAttributes as $name => $value) {
+            $attrs .= " {$name}=\"{$value}\" ";
+        }
+        echo "<{$this->containerHtmlTag} class=\"{$this->cssClass}\" {$attrs}>";
+        echo $this->prependHtml;
         $this->getChildsHtml($this->tree);
-        echo "\n</{$this->containerHtmlTag}>\n";
+        echo "</{$this->containerHtmlTag}>";
     }
     
     /**

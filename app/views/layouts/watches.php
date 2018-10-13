@@ -64,7 +64,9 @@
                             $menu = new app\widgets\menu\Menu(
                                 (new app\models\CategoryModel())->getCategories(),        
                                 [
-                                    //'cachePeriod' => 3600
+                                    'htmlAttributes' => [
+                                        'style' => 'color: red;'
+                                    ]
                                 ]
                             ); 
                         ?>
