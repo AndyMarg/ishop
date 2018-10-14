@@ -36,6 +36,12 @@ class Router {
      * Инициализируем маршруты приложения и админки
      */
     public function Init() {
+        // настроить пользовательские маршруты (перед остальными)
+        $path_user = Application::getConfig()->routes->user;
+        foreach ($path_user->asArray() as $path) {
+            $this->add($path['regexp'], ['controller' => $path['controller'], 'action' => $path['action']]);
+        }
+        
         // пути к свойствам маршрутов по умолчанию
         $path_base = Application::getConfig()->routes->default->base;
         $path_dyn = Application::getConfig()->routes->default->dynamic;

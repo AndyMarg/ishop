@@ -3,7 +3,7 @@
 namespace app\models;
 
 /**
- * Вмодель Валюты
+ * Модель Валюты
  */
 class HitProductsModel extends AppModel {
      

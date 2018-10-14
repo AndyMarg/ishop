@@ -51,10 +51,11 @@ class View {
      * @param string $description
      * @param string $keywords
      */
-    public function setMeta(string $title = '', string $description = '', string $keywords = '') {
-        $this->meta['title'] = $title;
-        $this->meta['description'] = $description;
-        $this->meta['keywords'] = $keywords;
+    public function setMeta($title = '', $description = null, $keywords = null) {
+        
+        $this->meta['title'] = empty($title) ? '' : $title;
+        $this->meta['description'] = empty($description) ? '' : $description;
+        $this->meta['keywords'] = empty($keywords) ? '' : $keywords;
     }
     
     /**

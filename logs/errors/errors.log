@@ -2,3 +2,5 @@
 [2018-09-21 18:0:10] Ошибка: Ошибочка!!!! | Файл: /home/marg/projects/ishop/public/index.php | Строка: 11
 [2018-09-25 08:0:52] Ошибка: Страница не найдена | Файл: /home/vagrant/projects/ishop/core/base/Router.php | Строка: 58
 [2018-09-25 10:0:27] Ошибка: Контроллер не найден: /app/controllers/PageController | Файл: /home/vagrant/projects/ishop/core/base/Router.php | Строка: 68
+[2018-10-14 14:0:42] Ошибка: Страница не найдена | Файл: /home/marg/projects/ishop/app/controllers/ProductController.php | Строка: 18
+[2018-10-14 14:0:50] Ошибка: Страница не найдена | Файл: /home/marg/projects/ishop/app/controllers/ProductController.php | Строка: 18

@@ -1,6 +1,6 @@
 {
     "dirs": {
-        "root": "ishop"
+        "root": "/"
     },
     "email": {
         "admin": "Andrey.Margashov@yandex.ru"
@@ -17,6 +17,15 @@
     "interface": {
         "pagination": {
             "rows_on_page": 3
+        }
+    },
+    "routes": {
+        "user": {
+            "product": {
+                "regexp": "^product/(?P<alias>[a-z0-9-]+)/?$",
+                "controller": "Product",
+                "action": "view"
+            }
         }
     },
     "db": {

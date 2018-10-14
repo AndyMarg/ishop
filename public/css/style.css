@@ -3071,3 +3071,24 @@ ul.tag-men {
 .product-one > .product-left {
     margin-bottom: 20px;
 }
+
+.menu-container {
+    background: #fff;
+}
+
+.menu > ul > li {
+    background: #fff;
+}
+
+.menu > ul > li > ul {
+    background: #fff;
+    border: 1px solid gray;
+}
+
+.menu > ul > li:hover {
+    color: darkblue;
+    text-decoration: underline;
+    background: #fff;
+}
+
+

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Luxury Watches A Ecommerce Category Flat Bootstrap Resposive Website Template | Home :: w3layouts</title>
+        <base href="/">
+        <?= $this->getMetaHtml(); ?>
         <script src="js/jquery-1.11.0.min.js"></script>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+        <link rel="stylesheet" href="css/ionicons.min.css">
+        <link rel="stylesheet" href="css/megamenu.css">
         <!--theme-style-->
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
-        <link href="css/memenu.css" rel="stylesheet" type="text/css" media="all" />
         <!--//theme-style-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -25,7 +27,7 @@
                             </div>
                             <div class="box1">
                                 <select tabindex="4" class="dropdown">
-                                    <option value="" class="label">English :</option>
+                                    <option value="" class="label">English</option>
                                     <option value="1">English</option>
                                     <option value="2">French</option>
                                     <option value="3">German</option>
@@ -52,7 +54,7 @@
         <!--top-header-->
         <!--start-logo-->
         <div class="logo">
-            <a href="index.html"><h1>Luxury Watches</h1></a>
+            <a href="<?= \core\base\Application::getConfig()->dirs->root?>"><h1>Luxury Watches</h1></a>
         </div>
         <!--start-logo-->
         <!--bottom-header-->
@@ -60,16 +62,20 @@
             <div class="container">
                 <div class="header">
                     <div class="col-md-9 header-left">
-                        <?php 
-                            $menu = new app\widgets\menu\Menu(
-                                (new app\models\CategoryModel())->getCategories(),        
-                                [
-                                    'htmlAttributes' => [
-                                        'style' => 'color: red;'
-                                    ]
-                                ]
-                            ); 
-                        ?>
+                        <div class="menu-container">
+                            <div class="menu">
+                                <?php 
+                                    $menu = new app\widgets\menu\Menu(
+                                        (new app\models\CategoryModel())->getCategories(),        
+                                        [
+                                            'htmlAttributes' => [
+                                                'style' => 'color: red;'
+                                            ]
+                                        ]
+                                    ); 
+                                ?>
+                            </div>    
+                        </div>    
                        <div class="clearfix"> </div>
                     </div>
                     <div class="col-md-3 header-right"> 
@@ -153,11 +159,12 @@
         <!--footer-end-->	
         
         <!--scripts-->
+        <!--End-slider-script-->
+        <script src="js/megamenu.js"></script>
+
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!--start-menu-->
         <script src="js/simpleCart.min.js"></script>
-        <script type="text/javascript" src="js/memenu.js"></script>
-        <script>$(document).ready(function () { $(".memenu").memenu();  });</script>	
         <!--dropdown-->
         <script src="js/jquery.easydropdown.js"></script>			
         <!--Slider-Starts-Here-->
@@ -182,8 +189,6 @@
 
             });
         </script>
-        <!--End-slider-script-->
-
 
     </body>
 </html>

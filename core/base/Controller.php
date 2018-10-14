@@ -41,7 +41,7 @@ abstract class Controller {
         if (method_exists($this, $action)) {
             $this->$action();
         } else {
-            throw new \Exception("Метод не найден: {$this->class}::{$action}", 500);
+            throw new \Exception("Метод не найден: " . get_class($this) .  "::{$action}", 500);
         }
     }
     
