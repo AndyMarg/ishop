@@ -3091,4 +3091,14 @@ ul.tag-men {
     background: #fff;
 }
 
+.quantity {
+    margin-top: 10px;
+}
+
+.tag-men > li >  span > a {
+    margin-left: 10px;
+    font-size: 1.3em;
+}
+
+
 

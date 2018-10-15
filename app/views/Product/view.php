@@ -1,3 +1,8 @@
+<?php 
+    $currency = (new \app\models\CurrencyModel())->getCurrency(); 
+    $categories = (new app\models\CategoryModel())->getCategories();
+    $category = $categories[$product['category_id']];
+?>
 <!--start-breadcrumbs-->
 <div class="breadcrumbs">
         <div class="container">
@@ -47,7 +52,7 @@
                                 </div>	
                                 <div class="col-md-7 single-top-right">
                                         <div class="single-para simpleCart_shelfItem">
-                                        <h2>Lorem Ipsum</h2>
+                                        <h2><?=$product['title']?></h2>
                                                 <div class="star-on">
                                                         <ul class="star-footer">
                                                                         <li><a href="#"><i> </i></a></li>
@@ -62,9 +67,15 @@
                                                         </div>
                                                 <div class="clearfix"> </div>
                                                 </div>
-
-                                                <h5 class="item_price">$ 95.00</h5>
-                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+                                                <h5 class="item_price">
+                                                    <?= $currency['symbol_left']; ?> 
+                                                    <?= $product['price'] * $currency['value']; ?>
+                                                    <?= $currency['symbol_right']; ?> 
+                                                </h5>
+                                                <?php if ($product['old_price']): ?>
+                                                    <del><?= $product['old_price'] * $currency['value']; ?></del>
+                                                <?php endif; ?>
+                                                <p><?=$product['content']?></p>
                                                 <div class="available">
                                                         <ul>
                                                                 <li>Color
@@ -84,14 +95,16 @@
                                                         <div class="clearfix"> </div>
                                                 </ul>
                                         </div>
-                                                <ul class="tag-men">
-                                                        <li><span>TAG</span>
-                                                        <span class="women1">: Women,</span></li>
-                                                        <li><span>SKU</span>
-                                                        <span class="women1">: CK09</span></li>
-                                                </ul>
-                                                        <a href="#" class="add-cart item_add">ADD TO CART</a>
-
+                                            <ul class="tag-men">
+                                                <li>
+                                                    <span>Category</span>
+                                                    <span>: <a href="category/<?=$category['alias']?>"><?=$category['title']?></a></span>
+                                                </li>
+                                            </ul>
+                                            <div class="quantity">
+                                                <input type="number" size="4" value="1" min="1" step="1" name="quantity" class="form-control">
+                                            </div>    
+                                            <a id="product-add" data-id="<?=$product['id']?>" href="cart/add/?id=<?=$product['id']?>" class="add-cart item_add add-to-cart-link">ADD TO CART</a>
                                         </div>
                                 </div>
                                 <div class="clearfix"> </div>
