@@ -42,7 +42,6 @@
 
 <!--product-starts-->
 <?php if ($hits): ?>
-    <?php $currency = (new \app\models\CurrencyModel())->getCurrency(); ?>
     <div class="product"> 
         <div class="container">
             <div class="product-top">

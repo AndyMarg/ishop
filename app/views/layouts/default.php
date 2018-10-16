@@ -12,6 +12,8 @@
         // отладочная информация по запросам
         if (core\base\Application::getConfig()->db->debug) {
             $logs = R::getDatabaseAdapter()->getDatabase()->getLogger();
+            
+            var_dump($logs);
         }
         ?>
 

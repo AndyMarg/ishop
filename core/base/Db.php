@@ -26,8 +26,8 @@ class db {
         \R::freeze(true);
         // включаем возможность отладки запросов
         if (Application::getConfig()->mode === "development" && $config->db->debug) {
-            \R::debug(true, 2 ); //select MODE 2 to see parameters filled in
-            \R::fancyDebug();   //since 4.2
+            \R::debug(true, 1 ); //select MODE 2 to see parameters filled in
+            //\R::fancyDebug();   //since 4.2
         }
         
     }

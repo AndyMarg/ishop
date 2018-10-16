@@ -158,6 +158,14 @@
         </div>
         <!--footer-end-->	
         
+         <?php
+            // отладочная информация по запросам
+            if (core\base\Application::getConfig()->db->debug) {
+                $logs = R::getDatabaseAdapter()->getDatabase()->getLogger();
+                var_dump($logs->grep('select'));
+            }
+        ?>
+
         <!--scripts-->
         <!--End-slider-script-->
         <script src="js/megamenu.js"></script>

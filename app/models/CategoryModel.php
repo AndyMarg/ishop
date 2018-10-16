@@ -8,11 +8,6 @@ namespace app\models;
 class CategoryModel extends AppModel {
     
     public function __construct() {
-        $this->setAttribute([
-            'name' => 'categories',
-            'sql' => 'select * from category',
-            'save' => true
-        ]);
         parent::__construct();
     }
     
@@ -21,6 +16,11 @@ class CategoryModel extends AppModel {
      * @return type
      */
     public function getCategories() {
+        $this->setAttribute([
+            'name' => 'categories',
+            'sql' => 'select * from category',
+            'save' => true
+        ]);
         return $this->getAttribute('categories')->getValue();
     }
 }

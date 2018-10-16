@@ -1,8 +1,3 @@
-<?php 
-    $currency = (new \app\models\CurrencyModel())->getCurrency(); 
-    $categories = (new app\models\CategoryModel())->getCategories();
-    $category = $categories[$product['category_id']];
-?>
 <!--start-breadcrumbs-->
 <div class="breadcrumbs">
         <div class="container">

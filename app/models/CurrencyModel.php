@@ -9,11 +9,6 @@ class CurrencyModel extends AppModel {
      
     public function __construct() {
         $this->setAttribute([
-            'name' => 'currencies',
-            'sql'  => 'select code, title, symbol_left, symbol_right, value, base from currency order by base desc',
-            'save' => true
-        ]);
-        $this->setAttribute([
             'name' => 'currency',
             'value' => $this->getCurrency()
         ]);
@@ -24,6 +19,11 @@ class CurrencyModel extends AppModel {
     * Возвращает текущую валюту
     */
     public function getCurrencies() {
+        $this->setAttribute([
+            'name' => 'currencies',
+            'sql'  => 'select code, title, symbol_left, symbol_right, value, base from currency order by base desc',
+            'save' => true
+        ]);
         return $this->getAttribute('currencies')->getValue();
     }
 

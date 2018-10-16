@@ -18,7 +18,8 @@ class MainController extends AppController {
         $config = Application::getConfig();
         $this->getView()->setMeta($config->site->shop_name, $config->site->description,$config->site->keywords);
         $brands = (new \app\models\BrandModel())->getBrands();
-        $hits = (new \app\models\HitProductsModel())->getHitProducts();
-        $this->getView()->setData(compact('brands', 'hits'));
+        $hits = (new \app\models\ProductsModel())->getHitProducts();
+        $currency = (new \app\models\CurrencyModel())->getCurrency(); 
+        $this->getView()->setData(compact('brands', 'hits', 'currency'));
     }
 }
