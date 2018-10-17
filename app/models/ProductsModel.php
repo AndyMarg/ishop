@@ -35,5 +35,18 @@ class ProductsModel extends AppModel {
         return $this->getAttribute('linked_products')->getValue();
     }
     
+    /**
+     * Возвращает галерею изображений для товара
+     * @param type $product_id ИД товара
+     */
+    public function getGallery($product_id) {
+        $this->setAttribute([
+            'name' => 'gallery',
+            'sql'  => "select * from gallery where product_id = :id limit 3",
+            'params' => array(':id' => $product_id)
+        ]);
+        return $this->getAttribute('gallery')->getValue();
+    }
+    
 }
 

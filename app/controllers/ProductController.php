@@ -12,22 +12,26 @@ class ProductController extends AppController {
     }
     
     public function viewAction() {
-        $modelProduct = new \app\models\ProductModel();
         $name = $this->getRoute()['alias'];
+
+        $modelProduct = new \app\models\ProductModel();
         $product = $modelProduct->getProductByName($name);
         $category = $modelProduct->getCategory($product['id']);
-        $linked = (new \app\models\ProductsModel())->getLinkedProducts($product['id']);
+        
+        $modelProducts = new \app\models\ProductsModel();
+        $linked = $modelProducts->getLinkedProducts($product['id']);
+        $gallery = $modelProducts->getGallery($product['id']);
+        
         $currency = (new \app\models\CurrencyModel())->getCurrency(); 
         
         if (!$product) {
             throw  new \Exception("Страница не найдена", 404);
         }
+        
         $this->getView()->setMeta($product['title'], $product['description'], $product['keywords']);
-        $this->getView()->setData(compact('product', 'category', 'linked', 'currency'));
+        $this->getView()->setData(compact('product', 'category', 'linked', 'currency', 'gallery'));
         
         // хлебные крошки
-        
-        // связанные товары
         
         // запись в куки запрошенного товара
         
