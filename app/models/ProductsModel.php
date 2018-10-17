@@ -29,7 +29,7 @@ class ProductsModel extends AppModel {
     public function getLinkedProducts(int $product_id) {
         $this->setAttribute([
             'name' => 'linked_products',
-            'sql'  => "select p.* from product p join related_product r on r.related_id = p.id where r.product_id = :id",
+            'sql'  => "select p.* from product p join related_product r on r.related_id = p.id where r.product_id = :id limit 3",
             'params' => array(':id' => $product_id)
         ]);
         return $this->getAttribute('linked_products')->getValue();

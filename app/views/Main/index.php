@@ -49,12 +49,13 @@
                     <?php foreach ($hits as $id => $hit): ?>
                         <div class="col-md-3 product-left">
                             <div class="product-main simpleCart_shelfItem">
+                                
                                 <a href="product/<?= $hit['alias']; ?>" class="mask"><img class="img-responsive zoom-img" src="images/<?= $hit['img']; ?>" alt="" /></a>
                                 <div class="product-bottom">
                                     <h3><a href="product/<?= $hit['alias']; ?>"><?= $hit['title']; ?></a></h3>
                                     <p>Explore Now</p>
                                     <h4>
-                                        <a class="add-to-cart-link" href="cart/add/?id=<?=$id;?>"><i></i></a> 
+                                        <a class="add-to-cart-link" href="cart/add/?id=<?=$id;?>" data-id="<?=$id;?>"><i></i></a> 
                                         <span class="item_price">
                                             <?= $currency['symbol_left']; ?> 
                                             <?= $hit['price'] * $currency['value']; ?>
@@ -70,6 +71,7 @@
                                         <span>-<?= 100-round(($hit['price'] / $hit['old_price'])*100); ?>%</span>
                                     <?php endif; ?>
                                 </div>
+                                
                             </div>
                         </div>
                     <?php endforeach; ?>

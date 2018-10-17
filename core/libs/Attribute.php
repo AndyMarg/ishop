@@ -17,13 +17,19 @@ class Attribute {
         if (key_exists('name', $opts)) { $this->name = $opts['name']; }
         if (key_exists('value', $opts)) { $this->value = $opts['value']; }
         if (key_exists('save', $opts)) { $this->save = $opts['save']; }
-        // сохраняем значение аттрибута в хранилище, если нужно
-        if ($this->save) {
-            Application::getStorage()->set($this->name, $this->value);
+        
+        // если значение не передано в опциях, пробуем получить из хранилища 
+        if (empty($this->value) && $this->save) {
+             $this->value = Application::getStorage()->get($this->name);
         }
-        // заполняем значение аттрибута из БД, если задан sql
-        if (key_exists('sql', $opts)) {
-            $this->getFromDB($opts['sql'], key_exists('params', $opts) ? $opts['params'] : []);
+        
+        // если значение не передано в опциях и отсутствует в хранилище и задан sql, заполняем значение аттрибута из БД
+        if (empty($this->value) && key_exists('sql', $opts)) {
+            $this->value = $this->getFromDB($opts['sql'], key_exists('params', $opts) ? $opts['params'] : []);
+        }
+        // сохраняем значение аттрибута в хранилище, если нужно
+        if (!empty($this->value) && $this->save) {
+            Application::getStorage()->set($this->name, $this->value);
         }
     }
     
@@ -33,11 +39,7 @@ class Attribute {
      * @param type $params
      */
     private function getFromDB(string $sql, $params) {
-            $this->value = \R::getAssoc($sql, $params);
-            // сохраняем в хранилище, если нужно
-            if ($this->save) {
-                Application::getStorage()->set($this->name, $this->value);
-            }
+        return \R::getAssoc($sql, $params);
     }
     
     /**
