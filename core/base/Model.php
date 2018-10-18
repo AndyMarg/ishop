@@ -48,8 +48,12 @@ abstract class Model {
      * @return type
      */
     public function __get($property) {
-        $object = new ArrayAsObject($this->data);
-        return $object->$property;
+        if (key_exists($property, $this->data)) {
+            $object = new ArrayAsObject($this->data);
+            return $object->$property;
+        }
+        return false;
     }
+    
 
 }

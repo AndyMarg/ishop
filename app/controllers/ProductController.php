@@ -15,18 +15,10 @@ class ProductController extends AppController {
         $name = $this->getRoute()['alias'];
 
         $product = new \app\models\ProductModel($name);
-        //var_dump($product->id); die;
         
-        //$product = $modelProduct->getProductByName($name);
-        //$category = $modelProduct->getCategory($product['id']);
-        $category = $product->getCategory($product->id);
-        
-        
-        $product = new \app\models\ProductsModel();
-        //$linked = $modelProducts->getLinkedProducts($product['id']);
-        $linked = $product->getLinkedProducts($product->id);
-        //$gallery = $modelProducts->getGallery($product['id']);
-        $gallery = $product->getGallery($product->id);
+        $modelProducts = new \app\models\ProductsModel();
+        $linked = $modelProducts->getLinkedProducts($product->id);
+        $gallery = $modelProducts->getGallery($product->id);
         
         $currency = (new \app\models\CurrencyModel())->getCurrency(); 
         
@@ -34,8 +26,8 @@ class ProductController extends AppController {
             throw  new \Exception("Страница не найдена", 404);
         }
         
-        $this->getView()->setMeta($product['title'], $product['description'], $product['keywords']);
-        $this->getView()->setData(compact('product', 'category', 'linked', 'currency', 'gallery'));
+        $this->getView()->setMeta($product->title, $product->description, $product->keywords);
+        $this->getView()->setData(compact('product', 'linked', 'currency', 'gallery'));
         
         // хлебные крошки
         

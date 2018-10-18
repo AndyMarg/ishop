@@ -29,7 +29,7 @@
                                                 </ul>
                                             </div> <!-- FlexSlider -->
                                         <?php else: ?>
-                                            <img src="images/<?=$product['img'];?>" alt="">
+                                            <img src="images/<?=$product->img;?>" alt="">
                                         <?php endif; ?>
                                         
                                         
@@ -49,7 +49,7 @@
                                 </div>	
                                 <div class="col-md-7 single-top-right">
                                         <div class="single-para simpleCart_shelfItem">
-                                        <h2><?=$product['title']?></h2>
+                                        <h2><?=$product->title?></h2>
                                                 <div class="star-on">
                                                         <ul class="star-footer">
                                                                         <li><a href="#"><i> </i></a></li>
@@ -66,13 +66,13 @@
                                                 </div>
                                                 <h5 class="item_price">
                                                     <?= $currency['symbol_left']; ?> 
-                                                    <?= $product['price'] * $currency['value']; ?>
+                                                    <?= $product->price * $currency['value']; ?>
                                                     <?= $currency['symbol_right']; ?> 
                                                 </h5>
-                                                <?php if ($product['old_price']): ?>
-                                                    <del><?= $product['old_price'] * $currency['value']; ?></del>
+                                                <?php if ($product->old_price): ?>
+                                                    <del><?= $product->old_price * $currency['value']; ?></del>
                                                 <?php endif; ?>
-                                                <p><?=$product['content']?></p>
+                                                <p><?=$product->content?></p>
                                                 <div class="available">
                                                         <ul>
                                                                 <li>Color
@@ -95,13 +95,13 @@
                                             <ul class="tag-men">
                                                 <li>
                                                     <span>Category</span>
-                                                    <span>: <a href="category/<?=$category['alias']?>"><?=$category['title']?></a></span>
+                                                    <span>: <a href="category/<?=$product->category->alias?>"><?=$product->category->title?></a></span>
                                                 </li>
                                             </ul>
                                             <div class="quantity">
                                                 <input type="number" size="4" value="1" min="1" step="1" name="quantity" class="form-control">
                                             </div>    
-                                            <a id="product-add" data-id="<?=$product['id']?>" href="cart/add/?id=<?=$product['id']?>" class="add-cart item_add add-to-cart-link">ADD TO CART</a>
+                                            <a id="product-add" data-id="<?=$product->id?>" href="cart/add/?id=<?=$product->id?>" class="add-cart item_add add-to-cart-link">ADD TO CART</a>
                                         </div>
                                 </div>
                                 <div class="clearfix"> </div>

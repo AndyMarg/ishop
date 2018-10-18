@@ -13,19 +13,20 @@ class ProductModel extends AppModel {
         } else {
             $this->data = $this->getProductByName($product);
         }
+        $this->data['category'] = $this->getCategory();
         parent::__construct();
     }
 
     /**
     * Возвращает информацию о товаре по алиасу
     */
-    public function getProductByName($name) {
+    private function getProductByName($name) {
         $this->setAttribute([
-            'name' => 'product_by_name',
+            'name' => 'product',
             'sql'  => "select * from product where alias = ? and status = '1'",
             'params' => [$name]
         ]);
-        $data = $this->getAttribute('product_by_name')->getValue();
+        $data = $this->getAttribute('product')->getValue();
         $id = array_keys($data)[0];
         $product = array_shift($data);
         $product['id'] = $id;
@@ -37,13 +38,13 @@ class ProductModel extends AppModel {
      * @param int $id
      * @return int
      */
-    public function getProductById(int $id) {
+    private function getProductById(int $id) {
         $this->setAttribute([
-            'name' => 'product_by_id',
+            'name' => 'product',
             'sql'  => "select * from product where id = :id",
             'params' => [':id' => $id]
         ]);
-        $data = $this->getAttribute('product_by_id')->getValue();
+        $data = $this->getAttribute('product')->getValue();
         $product = array_shift($data);
         $product['id'] = $id;
         return $product;
@@ -52,18 +53,8 @@ class ProductModel extends AppModel {
     /**
      * Возвращает категорию товара
      */
-    public function getCategory($product_id) {
-        $product = $this->getProductById($product_id);
-        return (new CategoryModel())->getCategories()[$product['category_id']];
+    private function getCategory() {
+        return (new CategoryModel())->getCategories()[$this->category_id];
     }
     
 }
-
-
-/*
- * 
- *  public function __get($property) {
-        $object = new ArrayAsObject($this->config);
-        return $object->$property;
-    }
- */
