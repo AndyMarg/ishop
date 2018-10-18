@@ -14,13 +14,19 @@ class ProductController extends AppController {
     public function viewAction() {
         $name = $this->getRoute()['alias'];
 
-        $modelProduct = new \app\models\ProductModel();
-        $product = $modelProduct->getProductByName($name);
-        $category = $modelProduct->getCategory($product['id']);
+        $product = new \app\models\ProductModel($name);
+        //var_dump($product->id); die;
         
-        $modelProducts = new \app\models\ProductsModel();
-        $linked = $modelProducts->getLinkedProducts($product['id']);
-        $gallery = $modelProducts->getGallery($product['id']);
+        //$product = $modelProduct->getProductByName($name);
+        //$category = $modelProduct->getCategory($product['id']);
+        $category = $product->getCategory($product->id);
+        
+        
+        $product = new \app\models\ProductsModel();
+        //$linked = $modelProducts->getLinkedProducts($product['id']);
+        $linked = $product->getLinkedProducts($product->id);
+        //$gallery = $modelProducts->getGallery($product['id']);
+        $gallery = $product->getGallery($product->id);
         
         $currency = (new \app\models\CurrencyModel())->getCurrency(); 
         

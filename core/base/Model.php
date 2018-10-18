@@ -2,6 +2,7 @@
 
 namespace core\base;
 
+use core\libs\ArrayAsObject;
 use core\libs\Attribute;
 
 /**
@@ -9,6 +10,9 @@ use core\libs\Attribute;
  */
 abstract class Model {
 
+    // массив для доступа через магические методы
+    protected $data = [];
+    
     // поля данных (вероятно из базы)
     private $attributes = [];
     // ошибки
@@ -35,6 +39,17 @@ abstract class Model {
      */    
     protected function getAttribute($name) {
         return $this->attributes[$name];
+    }
+
+     /**
+     * Доступ в свойству модели
+     * 
+     * @param type $property
+     * @return type
+     */
+    public function __get($property) {
+        $object = new ArrayAsObject($this->data);
+        return $object->$property;
     }
 
 }

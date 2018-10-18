@@ -5,6 +5,7 @@ namespace app\models;
 /**
  * Модель Валюты
  */
+
 class ProductsModel extends AppModel {
      
     public function __construct() {

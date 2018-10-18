@@ -7,9 +7,12 @@ namespace app\models;
  */
 class ProductModel extends AppModel {
     
-    private $id;
-     
-    public function __construct() {
+    public function __construct($product) {
+        if (gettype($product) === 'integer') {
+            $this->data = $this->getProductById($product);
+        } else {
+            $this->data = $this->getProductByName($product);
+        }
         parent::__construct();
     }
 
@@ -53,4 +56,14 @@ class ProductModel extends AppModel {
         $product = $this->getProductById($product_id);
         return (new CategoryModel())->getCategories()[$product['category_id']];
     }
+    
 }
+
+
+/*
+ * 
+ *  public function __get($property) {
+        $object = new ArrayAsObject($this->config);
+        return $object->$property;
+    }
+ */
