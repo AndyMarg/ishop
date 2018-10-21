@@ -17,9 +17,11 @@ class MainController extends AppController {
     public function indexAction() {
         $config = Application::getConfig();
         $this->getView()->setMeta($config->site->shop_name, $config->site->description,$config->site->keywords);
-        $brands = (new \app\models\BrandModel())->getBrands();
-        $hits = (new \app\models\ProductsModel())->getHitProducts();
-        $currency = (new \app\models\CurrencyModel())->getCurrency(); 
-        $this->getView()->setData(compact('brands', 'hits', 'currency'));
+        
+        $brands = (new \app\models\BrandsModel())->brands;
+        $products = (new \app\models\ProductsModel())->products;
+        $currency =(new \app\models\CurrenciesModel())->currency;
+        
+        $this->getView()->setData(compact('brands', 'products', 'currency'));
     }
 }

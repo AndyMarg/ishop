@@ -3,19 +3,23 @@
 namespace app\models;
 
 /**
- * Модель Брэнда
+ * Модель рисунка галереи
  */
 class BrandModel extends AppModel {
-   
-    public function __construct() {
-        parent::__construct();
+    
+        public function __construct($brand) {
+            parent::__construct($brand);
+    }
+    
+    /**
+     * Установить свойства модели при создании (вызывается из конструктора)
+     * @param type $item Элемент, идентифицирующий модель (ид, название и т.д.)
+     */
+    protected function setData($item = null) {
+        switch (gettype($item)):
+            case 'array':
+                $this->data = $item;
+        endswitch;
     }
 
-    public function getBrands() {
-        $this->setAttribute([
-            'name' => 'brands',
-            'sql'  => 'select * from brand limit 3'
-        ]);
-        return $this->getAttribute('brands')->getValue();
-    }
 }

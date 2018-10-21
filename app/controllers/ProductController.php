@@ -15,27 +15,20 @@ class ProductController extends AppController {
         $name = $this->getRoute()['alias'];
 
         $product = new \app\models\ProductModel($name);
-        
-        $modelProducts = new \app\models\ProductsModel();
-        $linked = $modelProducts->getLinkedProducts($product->id);
-        $gallery = $modelProducts->getGallery($product->id);
-        
-        $currency = (new \app\models\CurrencyModel())->getCurrency(); 
+        $currency = (new \app\models\CurrenciesModel())->currency; 
         
         if (!$product) {
             throw  new \Exception("Страница не найдена", 404);
         }
         
         $this->getView()->setMeta($product->title, $product->description, $product->keywords);
-        $this->getView()->setData(compact('product', 'linked', 'currency', 'gallery'));
+        $this->getView()->setData(compact('product', 'currency'));
         
         // хлебные крошки
         
         // запись в куки запрошенного товара
         
         // просмотренные товары
-        
-        // галерея
         
         // модификации товара
     }

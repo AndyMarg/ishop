@@ -3,11 +3,10 @@
 namespace app\models;
 
 /**
- * Модель Валюты
+ * Модель Брэнда
  */
-
-class ProductsModel extends AppModel {
-     
+class BrandsModel extends AppModel {
+   
     public function __construct() {
         parent::__construct();
     }
@@ -18,15 +17,13 @@ class ProductsModel extends AppModel {
      */
     protected function setData($item = null) {
         $this->setAttribute([
-            'name' => 'products',
-            'sql'  => "select * from product where hit = :hit and status = :status limit 8",
-            'params' => array(':hit' => '1', ':status' => '1')
+            'name' => 'brands',
+            'sql'  => 'select * from brand limit 3'
         ]);
-        foreach ($this->getAttribute('products')->getValue() as $id => $product) {
-            $product['id'] = $id;
-            $this->data['products'][$id] = new ProductModel($product);
+        foreach ($this->getAttribute('brands')->getValue() as $id => $brand) {
+            $brand['id'] = $id;
+            $this->data['brands'][$id] = new BrandModel($brand);
         }
     }
-
+    
 }
-

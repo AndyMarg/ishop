@@ -198,7 +198,7 @@
             });
         </script>
         <!--dropdown accordeon-->
-        <script src="js/jquery.easydropdown.js"></script>	
+        <!--<script src="js/jquery.easydropdown.js"></script>-->	
         <script type="text/javascript">
                 $(function() {
 

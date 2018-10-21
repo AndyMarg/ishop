@@ -3,12 +3,12 @@
 namespace app\models;
 
 /**
- * Модель Валюты
+ * Модель рисунка галереи
  */
-class CurrencyModel extends AppModel{
+class GalleryImageModel extends AppModel {
     
-    public function __construct($currency) {
-        parent::__construct($currency);
+        public function __construct($img) {
+            parent::__construct($img);
     }
     
     /**
