@@ -11,6 +11,7 @@ require_once Utils::getRoot() . '/vendor/rb-mysql.php';
  * Менеджер БД
  */
 class db {
+    private $db;
     
     use TSingleton;
     
@@ -30,5 +31,22 @@ class db {
             //\R::fancyDebug();   //since 4.2
         }
         
+        $this->addInit();
     }
+    
+    private function addInit() {
+        $opt = [
+            \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
+            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
+        ];
+        $config = Application::getConfig();
+        $this->db = new \PDO($config->db->dsn, $config->db->user, $config->db->pass, $opt);
+    }
+    
+    public function query(string $sql, array $params) {
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }          
+    
 }
