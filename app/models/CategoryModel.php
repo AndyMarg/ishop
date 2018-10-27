@@ -12,7 +12,8 @@ class CategoryModel extends AppModel {
     }
     
     /**
-     * Возвращает массив категорий
+     * Возвращает массив категорий.
+     * Индексы - ид категорий
      * @return type
      */
     public function getCategories() {
@@ -21,6 +22,9 @@ class CategoryModel extends AppModel {
             'sql' => 'select * from category',
             'save' => true
         ]);
-        return $this->getAttribute('categories')->getValue();
+        foreach ($this->getAttribute('categories')->getValue() as $value) {
+            $result[$value['id']] = $value;
+        }
+        return $result;
     }
 }

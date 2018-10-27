@@ -18,12 +18,11 @@ class CurrenciesModel extends AppModel {
     protected function setData($item = null) {
         $this->setAttribute([
             'name' => 'currencies',
-            'sql'  => 'select code, title, symbol_left, symbol_right, value, base from currency order by base desc',
+            'sql'  => 'select id, code, title, symbol_left, symbol_right, value, base from currency order by base desc',
             'save' => true
         ]);
-        foreach ($this->getAttribute('currencies')->getValue() as $code => $currency) {
-            $currency['code'] = $code;
-            $this->data['currencies'][$code] = new CurrencyModel($currency);
+        foreach ($this->getAttribute('currencies')->getValue() as $currency) {
+            $this->data['currencies'][$currency['code']] = new CurrencyModel($currency);
         }
     }
 

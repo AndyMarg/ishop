@@ -158,11 +158,10 @@
         </div>
         <!--footer-end-->	
         
-         <?php
+        <?php
             // отладочная информация по запросам
             if (core\base\Application::getConfig()->db->debug) {
-                $logs = R::getDatabaseAdapter()->getDatabase()->getLogger();
-                var_dump($logs->grep('select'));
+                echo \core\base\Application::getDb()->getLogHtml();
             }
         ?>
 

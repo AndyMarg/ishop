@@ -3100,5 +3100,19 @@ ul.tag-men {
     font-size: 1.3em;
 }
 
+/**************************/
+.db-log {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid gray;
+    background: #ffff99;
+}
+.db-log > p {
+    margin: 0;
+}
+.db-log > p > span {
+    font-weight: bold;
+    color: red;
+}
 
 

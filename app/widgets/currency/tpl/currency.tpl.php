@@ -1,7 +1,7 @@
 <option value="" class="label"><?= $currency->code; ?></option>
 <?php foreach($currencies->asArray() as $key => $value): ?>
-    <?php if($key !== $currency->code): ?>
-        <option value="<?= $key; ?>"><?= $key; ?></option>
+    <?php if($value->code !== $currency->code): ?>
+        <option value="<?= $value->code; ?>"><?= $value->code; ?></option>
     <?php endif; ?>
 <?php endforeach; ?>
 

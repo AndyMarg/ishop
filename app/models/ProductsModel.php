@@ -22,9 +22,8 @@ class ProductsModel extends AppModel {
             'sql'  => "select * from product where hit = :hit and status = :status limit 8",
             'params' => array(':hit' => '1', ':status' => '1')
         ]);
-        foreach ($this->getAttribute('products')->getValue() as $id => $product) {
-            $product['id'] = $id;
-            $this->data['products'][$id] = new ProductModel($product);
+        foreach ($this->getAttribute('products')->getValue() as $product) {
+            $this->data['products'][] = new ProductModel($product);
         }
     }
 

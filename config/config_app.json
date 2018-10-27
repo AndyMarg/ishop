@@ -32,7 +32,7 @@
        "dsn": "mysql:host=localhost;dbname=ishop;charset=utf8",
        "user": "root",
        "pass": "letmedoit",
-       "debug": false
+       "debug": true
     },
     "defaults": {
         "layout": "watches"

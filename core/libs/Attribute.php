@@ -39,12 +39,7 @@ class Attribute {
      * @param type $params
      */
     private function getFromDB(string $sql, $params) {
-        if ($this->name === 'currencies') {
-            var_dump(Application::getDb()->query($sql, $params));
-            var_dump(\R::getAssoc($sql, $params));
-        }
-        //return \R::getAssoc($sql, $params);
-        return \R::getAssoc($sql, $params);
+        return Application::getDb()->query($sql, $params);
     }
     
     /**
