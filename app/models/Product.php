@@ -5,7 +5,7 @@ namespace app\models;
 /**
  * Модель Продукта
  */
-class ProductModel extends AppModel {
+class Product extends AppModel {
     
     public function __construct($product) {
         parent::__construct($product);
@@ -36,7 +36,7 @@ class ProductModel extends AppModel {
         switch ($name):
             // название категории товара
             case 'category': 
-                $this->data['category'] = (new CategoryModel())->getCategories()[$this->category_id];
+                $this->data['category'] = (new Category())->getCategories()[$this->category_id];
                 break;
             // список связанных товаров
             case 'linked': 
@@ -46,7 +46,7 @@ class ProductModel extends AppModel {
                     'params' => array(':id' => $this->id)
                 ]);
                 foreach ($this->getAttribute('linked')->getValue() as $product) {
-                    $this->data['linked'][] = new ProductModel($product);
+                    $this->data['linked'][] = new Product($product);
                 }
                 break;
             // список рисунков галереи
@@ -57,7 +57,7 @@ class ProductModel extends AppModel {
                     'params' => array(':id' => $this->id)
                 ]);
                 foreach ($this->getAttribute('gallery')->getValue() as $img) {
-                    $this->data['gallery'][] = new GalleryImageModel($img);
+                    $this->data['gallery'][] = new GalleryImage($img);
                 }
                 break;
             endswitch;

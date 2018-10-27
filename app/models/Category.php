@@ -5,7 +5,7 @@ namespace app\models;
 /**
  * Модель категорий
  */
-class CategoryModel extends AppModel {
+class Category extends AppModel {
     
     public function __construct() {
         parent::__construct();

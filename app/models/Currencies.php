@@ -5,7 +5,7 @@ namespace app\models;
 /**
  * Вмодель Валюты
  */
-class CurrenciesModel extends AppModel {
+class Currencies extends AppModel {
      
     public function __construct() {
         parent::__construct();
@@ -22,7 +22,7 @@ class CurrenciesModel extends AppModel {
             'save' => true
         ]);
         foreach ($this->getAttribute('currencies')->getValue() as $currency) {
-            $this->data['currencies'][$currency['code']] = new CurrencyModel($currency);
+            $this->data['currencies'][$currency['code']] = new Currency($currency);
         }
     }
 

@@ -5,7 +5,7 @@ namespace app\models;
 /**
  * Модель рисунка галереи
  */
-class BrandModel extends AppModel {
+class Brand extends AppModel {
     
         public function __construct($brand) {
             parent::__construct($brand);

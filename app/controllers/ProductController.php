@@ -14,8 +14,8 @@ class ProductController extends AppController {
     public function viewAction() {
         $name = $this->getRoute()['alias'];
 
-        $product = new \app\models\ProductModel($name);
-        $currency = (new \app\models\CurrenciesModel())->currency; 
+        $product = new \app\models\Product($name);
+        $currency = (new \app\models\Currencies())->currency; 
         
         if (!$product) {
             throw  new \Exception("Страница не найдена", 404);

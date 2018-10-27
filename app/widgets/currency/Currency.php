@@ -2,7 +2,7 @@
 
 namespace app\widgets\currency;
 
-use app\models\CurrenciesModel;
+use app\models\Currencies;
 use core\base\Widget;
 
 /**
@@ -18,7 +18,7 @@ class Currency extends Widget{
       * Виртуальный метод. Исполнение виджета
       */
     protected function run() {
-        $model = new CurrenciesModel();
+        $model = new Currencies();
         $currencies = $model->currencies;
         $currency = $model->currency;
         $this->setData(compact('currencies', 'currency'));

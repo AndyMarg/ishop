@@ -5,7 +5,7 @@ namespace app\models;
 /**
  * Модель Валюты
  */
-class CurrencyModel extends AppModel{
+class Currency extends AppModel{
     
     public function __construct($currency) {
         parent::__construct($currency);

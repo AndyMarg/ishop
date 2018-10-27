@@ -5,7 +5,7 @@ namespace app\models;
 /**
  * Модель рисунка галереи
  */
-class GalleryImageModel extends AppModel {
+class GalleryImage extends AppModel {
     
         public function __construct($img) {
             parent::__construct($img);
