@@ -16,6 +16,7 @@ class Product extends AppModel {
      * @param type $item Элемент, идентифицирующий модель (ид, название и т.д.)
      */
     protected function setData($item = null) {
+        // создаем основные свойства товара
         switch (gettype($item)):
             case 'integer':
                 $this->data = $this->getProductById($item);
@@ -60,6 +61,26 @@ class Product extends AppModel {
                     $this->data['gallery'][] = new GalleryImage($img);
                 }
                 break;
+            // список просмотренных товаров
+            case 'viewed': 
+                $ids = $this->getRecentlyViewed();
+                if (empty($ids)) {
+                    $this->data['viewed'] = [];
+                } else {
+                    $this->setAttribute([
+                        'name' => 'viewed',
+                        'sql'  => "select * from product where id in (:ids) limit 3",
+                        'params' => [
+                            ':ids' => $ids
+                         ]   
+                    ]);
+                    foreach ($this->getAttribute('viewed')->getValue() as $product) {
+                        if ($product['id'] !== $this->id) {
+                            $this->data['viewed'][] = new Product($product);
+                        }
+                    }
+                }
+                break;
             endswitch;
     }
     
@@ -88,5 +109,19 @@ class Product extends AppModel {
         ]);
         return $this->getAttribute('product')->getValue()[0];
     }
-
+    
+    private function getRecentlyViewed() {
+        $cookie_value = filter_input(INPUT_COOKIE, 'recentlyViewed') ?? false;
+        return $cookie_value ? explode(',', $cookie_value) : [];
+    }
+    
+    public function setRecentlyViewed() {
+        $ids = $this->getRecentlyViewed();
+        if (!in_array($this->data['id'], $ids)) {
+            $ids[] = $this->data['id'];
+            sort($ids);
+            setcookie('recentlyViewed', implode(',', $ids), time() + 3600*24*7, '/');
+        }
+    }
+    
 }

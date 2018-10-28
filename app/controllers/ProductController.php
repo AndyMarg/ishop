@@ -15,6 +15,10 @@ class ProductController extends AppController {
         $name = $this->getRoute()['alias'];
 
         $product = new \app\models\Product($name);
+        $product->setRecentlyViewed();
+        
+        var_dump($product->viewed->asArray());
+
         $currency = (new \app\models\Currencies())->currency; 
         
         if (!$product) {
