@@ -44,8 +44,9 @@ class Product extends AppModel {
                 $this->setAttribute([
                     'name' => 'linked',
                     'sql'  => "select p.* from product p join related_product r on r.related_id = p.id where r.product_id = :id limit 3",
-                    'params' => array(':id' => $this->id)
+                    'params' => array(':id' => (int)$this->id)
                 ]);
+                $this->data['linked'] = [];
                 foreach ($this->getAttribute('linked')->getValue() as $product) {
                     $this->data['linked'][] = new Product($product);
                 }
@@ -55,7 +56,7 @@ class Product extends AppModel {
                 $this->setAttribute([
                     'name' => 'gallery',
                     'sql'  => "select * from gallery where product_id = :id limit 3",
-                    'params' => array(':id' => $this->id)
+                    'params' => array(':id' => (int)$this->id)
                 ]);
                 foreach ($this->getAttribute('gallery')->getValue() as $img) {
                     $this->data['gallery'][] = new GalleryImage($img);
@@ -64,20 +65,22 @@ class Product extends AppModel {
             // список просмотренных товаров
             case 'viewed': 
                 $ids = $this->getRecentlyViewed();
+                // удаляем ид текущего товара
+                $ids = array_diff($ids, [(int)$this->id]);
                 if (empty($ids)) {
                     $this->data['viewed'] = [];
                 } else {
+                    // берем последние "recently_viewed_count" товаров
+                    $ids = array_slice($ids, -(\core\base\Application::getConfig()->interface->recently_viewed_count));
                     $this->setAttribute([
                         'name' => 'viewed',
-                        'sql'  => "select * from product where id in (:ids) limit 3",
+                        'sql'  => "select * from product where id in (:ids)",
                         'params' => [
                             ':ids' => $ids
                          ]   
                     ]);
                     foreach ($this->getAttribute('viewed')->getValue() as $product) {
-                        if ($product['id'] !== $this->id) {
-                            $this->data['viewed'][] = new Product($product);
-                        }
+                        $this->data['viewed'][] = new Product($product);
                     }
                 }
                 break;
@@ -110,18 +113,30 @@ class Product extends AppModel {
         return $this->getAttribute('product')->getValue()[0];
     }
     
+    /**
+     * Возвращает массив идентификаторов последних просмотренныых товаров из куки
+     * @return type
+     */
     private function getRecentlyViewed() {
         $cookie_value = filter_input(INPUT_COOKIE, 'recentlyViewed') ?? false;
-        return $cookie_value ? explode(',', $cookie_value) : [];
+        $temp = $cookie_value ? explode(',', $cookie_value) : [];
+        $result = [];    
+        foreach ($temp as $id) {
+            $result[] = (int)$id;
+        }
+        return $result;
     }
     
+    /**
+     * Сохраняет массив последних просмотренных товаров в куки
+     */
     public function setRecentlyViewed() {
         $ids = $this->getRecentlyViewed();
-        if (!in_array($this->data['id'], $ids)) {
-            $ids[] = $this->data['id'];
-            sort($ids);
-            setcookie('recentlyViewed', implode(',', $ids), time() + 3600*24*7, '/');
-        }
+        // удаляем ид текущего товара
+        $ids = array_diff($ids, [(int)$this->id]);
+        // добавляем ид текущего товара в конец списка
+        $ids[] = $this->data['id'];
+        setcookie('recentlyViewed', implode(',', $ids), time() + 3600*24*7, '/');
     }
     
 }

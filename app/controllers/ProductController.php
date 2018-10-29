@@ -15,10 +15,9 @@ class ProductController extends AppController {
         $name = $this->getRoute()['alias'];
 
         $product = new \app\models\Product($name);
+        // сохраняем ид просмотренного товара в куке
         $product->setRecentlyViewed();
         
-        var_dump($product->viewed->asArray());
-
         $currency = (new \app\models\Currencies())->currency; 
         
         if (!$product) {
@@ -29,10 +28,6 @@ class ProductController extends AppController {
         $this->getView()->setData(compact('product', 'currency'));
         
         // хлебные крошки
-        
-        // запись в куки запрошенного товара
-        
-        // просмотренные товары
         
         // модификации товара
     }

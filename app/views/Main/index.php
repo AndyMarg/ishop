@@ -55,7 +55,7 @@
                                     <h3><a href="product/<?= $product->alias; ?>"><?= $product->title; ?></a></h3>
                                     <p>Explore Now</p>
                                     <h4>
-                                        <a class="add-to-cart-link" href="cart/add/?id=<?=$id;?>" data-id="<?=$id;?>"><i></i></a> 
+                                        <a class="add-to-cart-link" href="cart/add/?id=<?=$product->id;?>" data-id="<?=$product->id;?>"><i></i></a> 
                                         <span class="item_price">
                                             <?= $currency->symbol_left; ?> 
                                             <?= $product->price * $currency->value; ?>

@@ -17,7 +17,8 @@
     "interface": {
         "pagination": {
             "rows_on_page": 3
-        }
+        },
+        "recently_viewed_count": 3
     },
     "routes": {
         "user": {
