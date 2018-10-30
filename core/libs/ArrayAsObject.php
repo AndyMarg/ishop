@@ -5,7 +5,7 @@ namespace core\libs;
 /**
  * Массив как объект. Доступ с несущестующему свойству через __SET
  */
-class ArrayAsObject {
+class ArrayAsObject implements \IteratorAggregate {
 
     private $array;
     
@@ -49,4 +49,12 @@ class ArrayAsObject {
         return $this->array;
     }
     
+    /**
+     * Возвращает итератор для доступа к объекту как к массиву
+     * @return \core\libs\IteratorBase
+     */
+    public function getIterator() {
+        return new IteratorBase($this->array);
+    }
+
 }

@@ -22,7 +22,7 @@
     <div class="about"> 
         <div class="container">
             <div class="about-top grid-1">
-                <?php foreach ($brands->asArray() as $brand): ?>
+                <?php foreach ($brands as $brand): ?>
                     <div class="col-md-4 about-left">
                         <figure class="effect-bubba">
                             <img class="img-responsive" src="images/<?= $brand->img ?>" alt=""/>
@@ -46,7 +46,7 @@
         <div class="container">
             <div class="product-top">
                 <div class="product-one">
-                    <?php foreach ($products->asArray() as $id => $product): ?>
+                    <?php foreach ($products as $id => $product): ?>
                         <div class="col-md-3 product-left">
                             <div class="product-main simpleCart_shelfItem">
                                 
