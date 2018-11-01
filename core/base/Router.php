@@ -38,7 +38,7 @@ class Router {
     public function Init() {
         // настроить пользовательские маршруты (перед остальными)
         $path_user = Application::getConfig()->routes->user;
-        foreach ($path_user->asArray() as $path) {
+        foreach ($path_user as $path) {
             $this->add($path['regexp'], ['controller' => $path['controller'], 'action' => $path['action']]);
         }
         

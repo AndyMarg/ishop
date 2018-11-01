@@ -144,7 +144,7 @@
                 </ul>   
                         </div>
                          
-                    <?php if (!empty($product->linked->asArray())):?>    
+                    <?php if (!$product->linked->is_empty()):?>    
                             <div class="latestproducts">
                                    <h3>С этим товаром также покупают:</h3>
                                     <div class="product-one">
@@ -179,7 +179,7 @@
                                 </div>
                             </div>
                         <?php endif;?>    
-                    <?php if (!empty($product->viewed->asArray())):?>    
+                    <?php if (!$product->viewed->is_empty()):?>    
                             <div class="latestproducts">
                                    <h3>Недавно просмотренные товары:</h3>
                                     <div class="product-one">

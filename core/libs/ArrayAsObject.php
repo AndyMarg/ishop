@@ -57,4 +57,11 @@ class ArrayAsObject implements \IteratorAggregate {
         return new IteratorBase($this->array);
     }
 
+    /**
+     * Проверка, что объект не пустой
+     * @return type bool 
+     */
+    public function is_empty() {
+        return count($this->array) === 0;
+    }
 }
