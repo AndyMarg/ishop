@@ -17,8 +17,8 @@
                         <div class="col-md-9 single-main-left">
                         <div class="sngl-top">
                                 <div class="col-md-5 single-top-left">	
-                                    
-                                        <?php if ($product->gallery): ?>
+                                        
+                                        <?php if (!$product->gallery->is_empty()): ?>
                                             <div class="flexslider">
                                                 <ul class="slides">
                                                     <?php foreach ($product->gallery as $id => $item): ?>   

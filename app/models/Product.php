@@ -41,26 +41,22 @@ class Product extends AppModel {
                 break;
             // список связанных товаров
             case 'linked': 
-                $this->setAttribute([
+                $this->setProperty([
                     'name' => 'linked',
                     'sql'  => "select p.* from product p join related_product r on r.related_id = p.id where r.product_id = :id limit 3",
-                    'params' => array(':id' => (int)$this->id)
+                    'params' => array(':id' => (int)$this->id),
+                    'class' => 'Product'
                 ]);
-                $this->data['linked'] = [];
-                foreach ($this->getAttribute('linked')->getValue() as $product) {
-                    $this->data['linked'][] = new Product($product);
-                }
                 break;
             // список рисунков галереи
             case 'gallery': 
-                $this->setAttribute([
+                $this->setProperty([
                     'name' => 'gallery',
                     'sql'  => "select * from gallery where product_id = :id limit 3",
-                    'params' => array(':id' => (int)$this->id)
+                    'params' => array(':id' => (int)$this->id),
+                    'class' => 'GalleryImage'
                 ]);
-                foreach ($this->getAttribute('gallery')->getValue() as $img) {
-                    $this->data['gallery'][] = new GalleryImage($img);
-                }
+                
                 break;
             // список просмотренных товаров
             case 'viewed': 
@@ -72,19 +68,17 @@ class Product extends AppModel {
                 } else {
                     // берем последние "recently_viewed_count" товаров
                     $ids = array_slice($ids, -(\core\base\Application::getConfig()->interface->recently_viewed_count));
-                    $this->setAttribute([
+                    $this->setProperty([
                         'name' => 'viewed',
                         'sql'  => "select * from product where id in (:ids)",
                         'params' => [
                             ':ids' => $ids
-                         ]   
+                         ],
+                        'class' => 'Product'
                     ]);
-                    foreach ($this->getAttribute('viewed')->getValue() as $product) {
-                        $this->data['viewed'][] = new Product($product);
-                    }
                 }
                 break;
-            endswitch;
+        endswitch;
     }
     
     /**

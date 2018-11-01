@@ -54,7 +54,9 @@ class ArrayAsObject implements \IteratorAggregate {
      * @return \core\libs\IteratorBase
      */
     public function getIterator() {
-        return new IteratorBase($this->array);
+        $temp = $this->array;
+        unset($temp['source']);
+        return new IteratorBase($temp);
     }
 
     /**
@@ -62,6 +64,8 @@ class ArrayAsObject implements \IteratorAggregate {
      * @return type bool 
      */
     public function is_empty() {
-        return count($this->array) === 0;
+        $temp = $this->array;
+        unset($temp['source']);
+        return count($temp) === 0;
     }
 }

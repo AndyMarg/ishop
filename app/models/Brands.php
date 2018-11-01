@@ -16,14 +16,11 @@ class Brands extends AppModel {
      * @param type $item Элемент, идентифицирующий модель (ид, название и т.д.)
      */
     protected function setData($item = null) {
-        $this->setAttribute([
+        $this->setProperty([
             'name' => 'brands',
-            'sql'  => 'select * from brand limit 3'
+            'sql'  => 'select * from brand limit 3',
+            'class' => 'Brand'
         ]);
-        foreach ($this->getAttribute('brands')->getValue() as $id => $brand) {
-            $brand['id'] = $id;
-            $this->data['brands'][$id] = new Brand($brand);
-        }
     }
     
 }

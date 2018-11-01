@@ -58,6 +58,22 @@ abstract class Model {
     }
 
     /**
+     * Создать свойство модели 
+     * @param array $options Параметры свойства
+     */
+    protected function setProperty(array $options) {
+                $this->setAttribute($options);
+                $name = $options['name'];
+                $className = str_replace('/', '\\',  Application::getConfig()->dirs->models . '/' .  $options['class']);
+                $this->data[$name] = [];
+                $arrayFromDb = $this->getAttribute($name)->getValue();
+                foreach ($arrayFromDb as $item) {
+                    $this->data[$name][] = new $className($item);
+                }
+                $this->data[$name]['source'] = $arrayFromDb;
+    }
+    
+    /**
      * Доступ в свойству модели
      * 
      * @param type $property
@@ -72,6 +88,5 @@ abstract class Model {
             return $object->$property;
         }
     }
-    
     
 }
