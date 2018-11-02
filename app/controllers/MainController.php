@@ -3,6 +3,10 @@
 namespace app\controllers;
 
 use app\controllers\AppController;
+use app\models\Brands;
+use app\models\Categories;
+use app\models\Currencies;
+use app\models\Products;
 use core\base\Application;
 
 /**
@@ -18,9 +22,9 @@ class MainController extends AppController {
         $config = Application::getConfig();
         $this->getView()->setMeta($config->site->shop_name, $config->site->description,$config->site->keywords);
         
-        $brands = (new \app\models\Brands())->brands;
-        $products = (new \app\models\Products())->products;
-        $currency =(new \app\models\Currencies())->currency;
+        $brands = (new Brands())->brands;
+        $products = (new Products())->products;
+        $currency =(new Currencies())->currency;
         
         $this->getView()->setData(compact('brands', 'products', 'currency'));
     }

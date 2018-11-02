@@ -19,10 +19,11 @@ abstract class Model {
     private $errors = [];
     // ошибки валидации
     private $rules = [];
-    
+
     /**
      * КОНСТРУКТОР
      * @param type $item Элемент, идентифицирующий модель (ид, название и т.д.)
+     * @param string $id_name Название аттрибута кдасса, представляющего ид объекта модели
      */
     public function __construct($item = null) {
         $this->setData($item);
@@ -72,6 +73,13 @@ abstract class Model {
                 }
                 $this->data[$name]['source'] = $arrayFromDb;
     }
+    
+   /**
+    * Получить объект модели по ИД
+    * (может переоапределляться в наследниках)
+    * @param type $id ид модели
+    */
+    public function getById($id) {}
     
     /**
      * Доступ в свойству модели

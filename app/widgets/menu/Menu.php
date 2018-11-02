@@ -24,7 +24,9 @@ class Menu extends Widget {
 
 
     public function __construct($data, $options = []) {
-        $this->data = $data;
+        foreach ($data as $value) {
+            $this->data[(int)$value['id']] = $value;
+        }
         $this->tree = $this->getTree();
         parent::__construct('menu', $options);
     }

@@ -66,7 +66,7 @@
                             <div class="menu">
                                 <?php 
                                     $menu = new app\widgets\menu\Menu(
-                                        (new app\models\Category())->getCategories(),        
+                                        (new app\models\Categories())->categories->source->asArray(),            
                                         [
                                             'htmlAttributes' => [
                                                 'style' => 'color: red;'

@@ -3,12 +3,14 @@
 namespace app\models;
 
 /**
- * Модель списка товаров
+ * Модель списка связанных товаров
  */
-
-class Products extends AppModel {
-     
-    public function __construct() {
+class ProductsLinked extends Products {
+    
+    private $id;
+    
+    public function __construct($id) {
+        $this->id = $id;
         parent::__construct();
     }
 
@@ -19,10 +21,13 @@ class Products extends AppModel {
     protected function setData($item = null) {
         $this->setProperty([
             'name' => 'products',
-            'sql'  => "select * from product where hit = :hit and status = :status limit 8",
-            'params' => array(':hit' => '1', ':status' => '1'),
+            'sql'  => "select p.* from product p join related_product r on r.related_id = p.id where r.product_id = :id limit 3",
+            'params' => array(':id' => (int)$this->id),
             'class' => 'Product'
         ]);
     }
     
-}    
+}
+
+
+

@@ -68,4 +68,13 @@ class ArrayAsObject implements \IteratorAggregate {
         unset($temp['source']);
         return count($temp) === 0;
     }
+    
+    public function search(string $name, $value) {
+        foreach ($this->array as $item) {
+            if($item->$name == $value) {
+                return $item;
+            }
+        }
+        return false;
+    }
 }

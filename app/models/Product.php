@@ -37,16 +37,19 @@ class Product extends AppModel {
         switch ($name):
             // название категории товара
             case 'category': 
-                $this->data['category'] = (new Category())->getCategories()[$this->category_id];
+                $this->data['category'] = (new Categories())->getById($this->category_id);
                 break;
             // список связанных товаров
             case 'linked': 
+//                $this->data['linked'] = new ProductsLinked($this->id);
+                
                 $this->setProperty([
                     'name' => 'linked',
                     'sql'  => "select p.* from product p join related_product r on r.related_id = p.id where r.product_id = :id limit 3",
                     'params' => array(':id' => (int)$this->id),
                     'class' => 'Product'
                 ]);
+                
                 break;
             // список рисунков галереи
             case 'gallery': 

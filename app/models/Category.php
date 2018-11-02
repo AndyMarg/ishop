@@ -3,28 +3,23 @@
 namespace app\models;
 
 /**
- * Модель категорий
+ * Модель каткгории товара
  */
 class Category extends AppModel {
     
-    public function __construct() {
-        parent::__construct();
+        public function __construct($category) {
+            parent::__construct($category);
     }
     
     /**
-     * Возвращает массив категорий.
-     * Индексы - ид категорий
-     * @return type
+     * Установить свойства модели при создании (вызывается из конструктора)
+     * @param type $item Элемент, идентифицирующий модель (ид, название и т.д.)
      */
-    public function getCategories() {
-        $this->setAttribute([
-            'name' => 'categories',
-            'sql' => 'select * from category',
-            'save' => true
-        ]);
-        foreach ($this->getAttribute('categories')->getValue() as $value) {
-            $result[$value['id']] = $value;
-        }
-        return $result;
+    protected function setData($item = null) {
+        switch (gettype($item)):
+            case 'array':
+                $this->data = $item;
+        endswitch;
     }
+
 }
