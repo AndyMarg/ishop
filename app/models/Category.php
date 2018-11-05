@@ -3,23 +3,21 @@
 namespace app\models;
 
 /**
- * Модель каткгории товара
+ * Категория товара
  */
-class Category extends AppModel {
-    
-        public function __construct($category) {
-            parent::__construct($category);
-    }
-    
-    /**
-     * Установить свойства модели при создании (вызывается из конструктора)
-     * @param type $item Элемент, идентифицирующий модель (ид, название и т.д.)
-     */
-    protected function setData($item = null) {
-        switch (gettype($item)):
-            case 'array':
-                $this->data = $item;
-        endswitch;
-    }
+class Category extends AppModel{
 
+   /**
+     * КОНСТРУКТОР
+     * @param mix $data Массив данных модели категории или ид модели категории для получения данных из БД
+     */
+    public function __construct($data) {
+        $id = gettype($data) === 'integer' ? $data : NULL;
+         $options = [
+            'sql' => 'select * from category where id = :id',
+            'params' => [':id' => $id]
+        ];
+        parent::__construct($data, $options);
+    }
+    
 }

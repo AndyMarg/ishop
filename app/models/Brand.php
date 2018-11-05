@@ -3,23 +3,21 @@
 namespace app\models;
 
 /**
- * Модель рисунка галереи
+ * Брэнд
  */
 class Brand extends AppModel {
     
-        public function __construct($brand) {
-            parent::__construct($brand);
+   /**
+     * КОНСТРУКТОР
+     * @param mix $data Массив данных модели брэнда или ид модели брэнда для получения данных из БД
+     */
+    public function __construct($data) {
+        $id = gettype($data) === 'integer' ? $data : NULL;
+         $options = [
+            'sql' => 'select * from brand where id = :id',
+            'params' => [':id' => $id]
+        ];
+        parent::__construct($data, $options);
     }
     
-    /**
-     * Установить свойства модели при создании (вызывается из конструктора)
-     * @param type $item Элемент, идентифицирующий модель (ид, название и т.д.)
-     */
-    protected function setData($item = null) {
-        switch (gettype($item)):
-            case 'array':
-                $this->data = $item;
-        endswitch;
-    }
-
 }

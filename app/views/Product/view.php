@@ -21,7 +21,7 @@
                                         <?php if (!$product->gallery->is_empty()): ?>
                                             <div class="flexslider">
                                                 <ul class="slides">
-                                                    <?php foreach ($product->gallery as $id => $item): ?>   
+                                                    <?php foreach ($product->gallery as $item): ?>   
                                                         <li data-thumb="images/<?=$item->img;?>">
                                                             <div class="thumb-image"> <img src="images/<?=$item->img;?>" data-imagezoom="true" class="img-responsive" alt=""/> </div>
                                                         </li>
@@ -148,7 +148,7 @@
                             <div class="latestproducts">
                                    <h3>С этим товаром также покупают:</h3>
                                     <div class="product-one">
-                                    <?php foreach ($product->linked as $id => $item): ?>
+                                    <?php foreach ($product->linked as $item): ?>
                                         <div class="col-md-4 product-left p-left"> 
                                                 <div class="product-main simpleCart_shelfItem">
                                                     <a href="product/<?= $item->alias; ?>" class="mask"><img class="img-responsive zoom-img" src="images/<?= $item->img; ?>" alt="" /></a>
@@ -179,11 +179,13 @@
                                 </div>
                             </div>
                         <?php endif;?>    
-                    <?php if (!$product->viewed->is_empty()):?>    
+                            
+                           
+                    <?php if ($product->viewed): ?>    
                             <div class="latestproducts">
                                    <h3>Недавно просмотренные товары:</h3>
                                     <div class="product-one">
-                                    <?php foreach ($product->viewed as $id => $item): ?>
+                                    <?php foreach ($product->viewed as $item): ?>
                                         <div class="col-md-4 product-left p-left"> 
                                                 <div class="product-main simpleCart_shelfItem">
                                                     <a href="product/<?= $item->alias; ?>" class="mask"><img class="img-responsive zoom-img" src="images/<?= $item->img; ?>" alt="" /></a>

@@ -3,23 +3,21 @@
 namespace app\models;
 
 /**
- * Модель рисунка галереи
+ * Рисунок галереи
  */
 class GalleryImage extends AppModel {
     
-        public function __construct($img) {
-            parent::__construct($img);
+   /**
+     * КОНСТРУКТОР
+     * @param mix $data Массив данных модели рисунка или ид модели рисунка для получения данных из БД
+     */
+    public function __construct($data) {
+        $id = gettype($data) === 'integer' ? $data : NULL;
+         $options = [
+            'sql' => 'select * from gallery where id = :id',
+            'params' => [':id' => $id]
+        ];
+        parent::__construct($data, $options);
     }
     
-    /**
-     * Установить свойства модели при создании (вызывается из конструктора)
-     * @param type $item Элемент, идентифицирующий модель (ид, название и т.д.)
-     */
-    protected function setData($item = null) {
-        switch (gettype($item)):
-            case 'array':
-                $this->data = $item;
-        endswitch;
-    }
-
 }

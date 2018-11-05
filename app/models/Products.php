@@ -2,27 +2,20 @@
 
 namespace app\models;
 
+use core\base\_ModelListDb;
+
 /**
  * Модель списка товаров
  */
-
-class Products extends AppModel {
-     
+class Products extends _ModelListDb {
+    
     public function __construct() {
-        parent::__construct();
-    }
-
-    /**
-     * Установить свойства модели при создании (вызывается из конструктора)
-     * @param type $item Элемент, идентифицирующий модель (ид, название и т.д.)
-     */
-    protected function setData($item = null) {
-        $this->setProperty([
-            'name' => 'products',
+        $options = [
             'sql'  => "select * from product where hit = :hit and status = :status limit 8",
             'params' => array(':hit' => '1', ':status' => '1'),
             'class' => 'Product'
-        ]);
+        ];
+        parent::__construct($options);
     }
     
-}    
+}

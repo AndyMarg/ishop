@@ -3,23 +3,29 @@
 namespace app\models;
 
 /**
- * Модель Валюты
+ * Валюта
  */
-class Currency extends AppModel{
+class Currency extends AppModel {
     
-    public function __construct($currency) {
-        parent::__construct($currency);
+   /**
+     * КОНСТРУКТОР
+     * @param mix $data Массив данных модели валюты или ид модели валюты для получения данных из БД
+     */
+    public function __construct($data) {
+        $id = gettype($data) === 'integer' ? $data : NULL;
+         $options = [
+            'sql' => 'select * from currency where id = :id',
+            'params' => [':id' => $id]
+        ];
+        parent::__construct($data, $options);
     }
     
     /**
-     * Установить свойства модели при создании (вызывается из конструктора)
-     * @param type $item Элемент, идентифицирующий модель (ид, название и т.д.)
+     * Получить код текущей валюты из куки
+     * @return type
      */
-    protected function setData($item = null) {
-        switch (gettype($item)):
-            case 'array':
-                $this->data = $item;
-        endswitch;
+    public static function getCurrentCode() {
+        $code = filter_input(INPUT_COOKIE, 'currency');
+        return isset($code) ? $code : false;
     }
-
 }

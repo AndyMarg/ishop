@@ -18,9 +18,9 @@ class Currency extends Widget{
       * Виртуальный метод. Исполнение виджета
       */
     protected function run() {
-        $model = new Currencies();
-        $currencies = $model->currencies;
-        $currency = $model->currency;
+        $currencies = new Currencies();
+        $current_code = \app\models\Currency::getCurrentCode();
+        $currency = ($current_code) ? $currencies->search('code', $current_code) : $currencies->get(0);
         $this->setData(compact('currencies', 'currency'));
         parent::run();
      }

@@ -2,32 +2,21 @@
 
 namespace app\models;
 
-/**
- * Модель списка связанных товаров
- */
-class ProductsLinked extends Products {
-    
-    private $id;
-    
-    public function __construct($id) {
-        $this->id = $id;
-        parent::__construct();
-    }
+use core\base\_ModelListDb;
 
-    /**
-     * Установить свойства модели при создании (вызывается из конструктора)
-     * @param type $item Элемент, идентифицирующий модель (ид, название и т.д.)
-     */
-    protected function setData($item = null) {
-        $this->setProperty([
-            'name' => 'products',
+/**
+ * Список связанных продуктов
+ */
+class ProductsLinked extends _ModelListDb {
+
+    public function __construct(int $id) {
+        $options = [
             'sql'  => "select p.* from product p join related_product r on r.related_id = p.id where r.product_id = :id limit 3",
-            'params' => array(':id' => (int)$this->id),
-            'class' => 'Product'
-        ]);
+            'params' => [":id" => $id],
+            'class' => 'Product',
+            'storage' => 'productsLinked'
+        ];
+        parent::__construct($options);
     }
     
 }
-
-
-

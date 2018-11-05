@@ -2,11 +2,10 @@
 
 namespace app\models;
 
-use core\base\Model;
-
 /**
- * Класс для наследования моделями приложения
+ * Класс модели специфичный для приложения
+ * (на всякий случай )
  */
-class AppModel extends Model {
+class AppModel extends \core\base\_ModelDb {
     
 }

@@ -1,37 +1,21 @@
 <?php
 
+
 namespace app\models;
 
+use core\base\_ModelListDb;
+
 /**
- * Модель категорий
+ * Список категорий товаров
  */
-class Categories extends AppModel {
+class Categories extends _ModelListDb {
     
     public function __construct() {
-        parent::__construct();
-    }
-    
-    /**
-     * Установить свойства модели при создании (вызывается из конструктора)
-     * @param type $item Элемент, идентифицирующий модель (ид, название и т.д.)
-     */
-    protected function setData($item = null) {
-        $this->setProperty([
-            'name' => 'categories',
-            'sql' => 'select * from category',
-            'save' => true,
+        $options = [
+            'sql'  => "select * from category",
             'class' => 'Category'
-        ]);
+        ];
+        parent::__construct($options);
     }
-
-    /**
-    * Получить объект модели по ИД
-    * (может переоапределляться в наследниках)
-    * @param type $id ид модели
-    */
-    public function getById($id) {
-        return $this->categories->search('id', $id);
-    }
-    
+   
 }
-
