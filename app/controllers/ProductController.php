@@ -20,6 +20,7 @@ class ProductController extends AppController {
     public function viewAction() {
         $name = $this->getRoute()['alias'];
 
+        // запрошенный товар
         $product = new Product($name);
         if (!$product) {
             throw  new Exception("Страница не найдена", 404);
@@ -28,11 +29,9 @@ class ProductController extends AppController {
         // сохраняем ид просмотренного товара в куке
         ProductsViewed::setRecentlyViewed($product->id);
         
-        // получить текущую валюту
-        $currencies = new Currencies();
-        $current_code = Currency::getCurrentCode();
-        $currency = ($current_code) ? $currencies->search('code', $current_code) : $currencies->get(0);
-        
+        // текущая валюта
+        $currency = (new Currencies())->current;
+
         $this->getView()->setMeta($product->title, $product->description, $product->keywords);
         $this->getView()->setData(compact('product', 'currency'));
         

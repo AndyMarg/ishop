@@ -5,7 +5,7 @@ namespace app\models;
 use core\base\Application;
 
 /**
- * Модель товара
+ * Товар
  */
 class Product extends AppModel {
     
@@ -36,13 +36,7 @@ class Product extends AppModel {
      * @return Category
      */
     public function getCategory() {
-        $storage = 'category_' . $this->category_id;
-        $category = Application::getStorage()->get($storage);
-        if (!$category) {
-            $category = new Category((int)$this->category_id);
-        }    
-        Application::getStorage()->set($storage, $category);
-        return $category;
+        return new Category((int)$this->category_id);
     }
     
     /**
@@ -66,6 +60,17 @@ class Product extends AppModel {
         } else {
             return false;
         }    
+    }
+    
+    public function getBreadcrumbs() {
+        $categories = new Categories();
+        $category = $categories->search('id', $this->category_id);
+        do {
+            $result[] = $category;
+            $parent_id = $category->parent_id;
+            $category = $categories->search('id', $parent_id);
+        } while ((int)$parent_id != 0);
+        return array_reverse($result);
     }
     
 }

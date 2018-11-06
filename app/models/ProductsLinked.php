@@ -2,12 +2,12 @@
 
 namespace app\models;
 
-use core\base\_ModelListDb;
+use core\base\ModelListDb;
 
 /**
  * Список связанных продуктов
  */
-class ProductsLinked extends _ModelListDb {
+class ProductsLinked extends ModelListDb {
 
     public function __construct(int $id) {
         $options = [

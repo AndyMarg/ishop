@@ -2,12 +2,12 @@
 
 namespace app\models;
 
-use core\base\_ModelListDb;
+use core\base\ModelListDb;
 
 /**
  * Список брэндов
  */
-class Brands extends _ModelListDb {
+class Brands extends ModelListDb {
     
     public function __construct() {
         $options = [

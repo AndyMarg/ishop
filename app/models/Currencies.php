@@ -2,12 +2,12 @@
 
 namespace app\models;
 
-use core\base\_ModelListDb;
+use core\base\ModelListDb;
 
 /**
  * Список валют
  */
-class Currencies extends _ModelListDb {
+class Currencies extends ModelListDb {
     
     public function __construct() {
         $options = [
@@ -18,4 +18,12 @@ class Currencies extends _ModelListDb {
         parent::__construct($options);
     }
     
+    /**
+     * Текущая валюта
+     * @return type
+     */
+    public function getCurrent() {
+        $current_code = Currency::getCurrentCode();
+        return ($current_code) ? $this->search('code', $current_code) : $this->at(0);
+    }
 }

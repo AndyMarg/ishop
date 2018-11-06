@@ -19,8 +19,8 @@ class Currency extends Widget{
       */
     protected function run() {
         $currencies = new Currencies();
-        $current_code = \app\models\Currency::getCurrentCode();
-        $currency = ($current_code) ? $currencies->search('code', $current_code) : $currencies->get(0);
+        $currency = $currencies->current;
+
         $this->setData(compact('currencies', 'currency'));
         parent::run();
      }

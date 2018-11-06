@@ -1,6 +1,6 @@
 <?php
 
-use core\base\_ModelList;
+use core\base\ModelList;
 use core\base\Application;
 
 namespace core\base;
@@ -8,7 +8,7 @@ namespace core\base;
 /**
  * Список моделей из ДБ
  */
-class _ModelListDb extends _ModelList {
+class ModelListDb extends ModelList {
 
     private $options = [];      // свойства модели
     private $source = [];       // данные из базы в виде массива (индексирован по порядку)

@@ -8,7 +8,7 @@ use IteratorAggregate;
 /**
  * Список моделей
  */
-class _ModelList implements IteratorAggregate {
+class ModelList implements IteratorAggregate {
     
     private $items = [];   // массив объектов моделей
     
@@ -39,20 +39,20 @@ class _ModelList implements IteratorAggregate {
      * @return Объект модели, если найден, иначе false
      */
     public function search(string $name, $value) {
-    foreach ($this->items as $item) {
-        if($item->$name == $value) {
-            return $item;
+        foreach ($this->items as $item) {
+            if($item->$name == $value) {
+                return $item;
+            }
         }
+        return false;
     }
-    return false;
-}
 
     /**
      * Получить объект модели по индексу
      * @param type $index
      * @return type
      */
-    public function get($index) {
+    public function at($index) {
         return $this->items[$index];
     }
     
@@ -72,4 +72,18 @@ class _ModelList implements IteratorAggregate {
         return count($this->items);
     }
 
+    /**
+     * Доступ к несуществующему свойству объекта
+     * @param type $property Часть имени публичного метода get{$Property}()
+     * @return mix Результат вызова метода 
+     * @throws \Exception Если такого метода не существует
+     */
+    public function __get($property) {
+        $method = 'get' . ucfirst($property);
+        if (!method_exists($this, $method)) {
+            throw new \Exception("Not found public method \"{$method}\"");
+        }    
+        return $this->$method();
+    }
+    
 }

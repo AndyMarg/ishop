@@ -5,7 +5,7 @@ namespace core\base;
 /**
  * Класс модели с данными из БД
  */
-abstract class _ModelDb extends _Model {
+abstract class ModelDb extends Model {
     
     private $options = [];  //  свойства модели
     
@@ -20,11 +20,23 @@ abstract class _ModelDb extends _Model {
         if (isset($options)) {
             $this->options = $options;
         }
-        // если передан не массив данных, загружаем из БД    
-        if (gettype($data) !== 'array') {
-            $data = $this->load($data);
+        // пробуем получить из хранилища, если задана установка для хранилища 
+        if (gettype($data) !== 'array' && !empty($options['storage'])) {
+             $fromStorage = Application::getStorage()->get($options['storage']);
         }
-        
+        // если их хранилища не получили 
+        if (empty($fromStorage)) {
+            // если передан не массив данных, загружаем из БД 
+            if (gettype($data) !== 'array') {
+                $data = $this->load($data);
+            }
+        } else {
+            $data = $fromStorage;
+        }
+        // сохраняем в хранилище, если задана установка для хранилища 
+        if (!empty($data) && !empty($options['storage'])) {
+             Application::getStorage()->set($options['storage'], $data);
+        }
         parent::__construct($data);
     }
 

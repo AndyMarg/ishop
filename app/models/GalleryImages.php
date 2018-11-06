@@ -2,12 +2,12 @@
 
 namespace app\models;
 
-use core\base\_ModelListDb;
+use core\base\ModelListDb;
 
 /**
  * Список рисунков галереи
  */
-class GalleryImages extends _ModelListDb {
+class GalleryImages extends ModelListDb {
     
     public function __construct(int $id) {
         $options = [

@@ -15,7 +15,8 @@ class Category extends AppModel{
         $id = gettype($data) === 'integer' ? $data : NULL;
          $options = [
             'sql' => 'select * from category where id = :id',
-            'params' => [':id' => $id]
+            'params' => [':id' => $id],
+            'storage' => "category_{$id}"
         ];
         parent::__construct($data, $options);
     }

@@ -2,12 +2,12 @@
 
 namespace app\models;
 
-use core\base\_ModelListDb;
+use core\base\ModelListDb;
 
 /**
  * Список просмотренных товаров
  */
-class ProductsViewed extends _ModelListDb {
+class ProductsViewed extends ModelListDb {
     
     public function __construct(int $id) {
         $ids = self::getRecentlyViewed();

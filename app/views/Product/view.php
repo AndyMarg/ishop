@@ -3,8 +3,13 @@
         <div class="container">
                 <div class="breadcrumbs-main">
                         <ol class="breadcrumb">
-                                <li><a href="index.html">Home</a></li>
-                                <li class="active">Single</li>
+                                <li><a href="/">Home</a></li>
+                                <?php if (count($product->breadcrumbs) > 0):?>
+                                    <?php foreach ($product->breadcrumbs as $category): ?>
+                                        <li><a href="category/<?=$category->alias;?>"><?=$category->title;?></a> </li>
+                                    <?php endforeach; ?>
+                                    <li class="active"><a href="#"><?=$product->title;?></a> </li>    
+                                <?php endif; ?>
                         </ol>
                 </div>
         </div>
