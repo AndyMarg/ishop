@@ -62,6 +62,10 @@ class Product extends AppModel {
         }    
     }
     
+    /**
+     * Возвращает массив объектов категории товаря для представления  в виде "хлебных крошек"
+     * @return type array
+     */
     public function getBreadcrumbs() {
         $categories = new Categories();
         $category = $categories->search('id', $this->category_id);
@@ -73,4 +77,7 @@ class Product extends AppModel {
         return array_reverse($result);
     }
     
+    public function getModifications() {
+        return new Modifications($this->id);
+    }
 }

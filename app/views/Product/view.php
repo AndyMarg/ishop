@@ -69,34 +69,34 @@
                                                         </div>
                                                 <div class="clearfix"> </div>
                                                 </div>
-                                                <h5 class="item_price">
+                                                <h5 id="main-price" class="item_price" data-base="<?= $product->price * $currency->value; ?>">
                                                     <?= $currency->symbol_left; ?> 
-                                                    <?= $product->price * $currency->value; ?>
-                                                    <?= $currency->symbol_right; ?> 
+                                                    <span><?= $product->price * $currency->value; ?></span>
+                                                    <?= $currency->symbol_right; ?>
                                                 </h5>
                                                 <?php if ($product->old_price): ?>
                                                     <del><?= $product->old_price * $currency->value; ?></del>
                                                 <?php endif; ?>
                                                 <p><?=$product->content?></p>
-                                                <div class="available">
-                                                        <ul>
-                                                                <li>Color
-                                                                        <select>
-                                                                        <option>Silver</option>
-                                                                        <option>Black</option>
-                                                                        <option>Dark Black</option>
-                                                                        <option>Red</option>
-                                                                </select></li>
-                                                        <li class="size-in">Size<select>
-                                                                <option>Large</option>
-                                                                <option>Medium</option>
-                                                                <option>small</option>
-                                                                <option>Large</option>
-                                                                <option>small</option>
-                                                        </select></li>
-                                                        <div class="clearfix"> </div>
+                                            
+                                            <!-- product modifications -->    
+                                            <?php if(!$product->modifications->is_empty()): ?>    
+                                            <div class="available">
+                                                <ul>
+                                                    <li>
+                                                        Color
+                                                        <select>
+                                                            <option>Выбрать цвет</option>
+                                                            <?php foreach ($product->modifications as $item): ?>
+                                                                <option value="<?=$item->id?>" data-title="<?=$item->title?>" data-price="<?=$item->price*$currency->value?>"><?=$item->title?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </li>
+                                                    <div class="clearfix"> </div>
                                                 </ul>
-                                        </div>
+                                            </div>
+                                             <?php endif;?>
+                                                
                                             <ul class="tag-men">
                                                 <li>
                                                     <span>Category</span>

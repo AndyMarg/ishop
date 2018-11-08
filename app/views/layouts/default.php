@@ -7,15 +7,5 @@
     <body> 
         <h1>Layout DEFAULT</h1>
         <?= $content; ?> 
-        
-        <?php
-        // отладочная информация по запросам
-        if (core\base\Application::getConfig()->db->debug) {
-            $logs = R::getDatabaseAdapter()->getDatabase()->getLogger();
-            
-            var_dump($logs);
-        }
-        ?>
-
     </body>
 </html>
