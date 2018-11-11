@@ -44,4 +44,12 @@ abstract class Model {
         unset($this->data[$property]);
     }
     
+    /**
+     * Данные модели в виде массива
+     * @return type
+     */
+    public function asArray() {
+        return $this->data;
+    }
+    
 }

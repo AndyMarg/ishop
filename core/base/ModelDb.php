@@ -40,7 +40,6 @@ abstract class ModelDb extends Model {
         parent::__construct($data);
     }
 
-    
     /**
      * Получить данные объекта модели из БД
      * @param mix $param 
@@ -72,7 +71,8 @@ abstract class ModelDb extends Model {
                 }
                 break;
         endswitch;
-        return Application::getDb()->query($sql, $params)[0];
+        $result = Application::getDb()->query($sql, $params);
+        return !empty($result) ? $result[0] : [];
     }
     
     /**

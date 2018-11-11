@@ -86,7 +86,7 @@
                                                     <li>
                                                         Color
                                                         <select>
-                                                            <option>Выбрать цвет</option>
+                                                            <option value="0">Выбрать цвет</option>
                                                             <?php foreach ($product->modifications as $item): ?>
                                                                 <option value="<?=$item->id?>" data-title="<?=$item->title?>" data-price="<?=$item->price*$currency->value?>"><?=$item->title?></option>
                                                             <?php endforeach; ?>

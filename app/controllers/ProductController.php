@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use app\models\Currencies;
-use app\models\Currency;
 use app\models\Product;
 use app\models\ProductsViewed;
 use Exception;

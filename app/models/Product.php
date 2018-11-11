@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use core\base\Application;
-
 /**
  * Товар
  */

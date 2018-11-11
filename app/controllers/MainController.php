@@ -5,7 +5,6 @@ namespace app\controllers;
 use app\controllers\AppController;
 use app\models\Brands;
 use app\models\Currencies;
-use app\models\Currency;
 use app\models\Products;
 use core\base\Application;
 
