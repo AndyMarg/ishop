@@ -33,6 +33,15 @@ abstract class Controller {
     }
     
     /**
+     * True, если запрос ajax
+     * @return type
+     */
+    public function isAjax() {
+        $is_ajax = filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH');
+        return isset($is_ajax) && $is_ajax === 'XMLHttpRequest';
+    }
+    
+    /**
      * Вызываем метод действия в соответствии с маршрутом для подготовки данных для представления
      * @throws \Exception
      */

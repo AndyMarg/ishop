@@ -15,11 +15,9 @@ class CartController extends AppController {
         $quantity = (int) filter_input(INPUT_GET, 'quantity');
         $modifier_id = (int) filter_input(INPUT_GET, 'modifier');
        
-        $product = new Product(1000);
-        if(empty($product->asArray())) {
-            echo "###############";
-            die;
-        }
+        $product = new Product($product_id);
+        
+        die;
         
         $modifier = $modifier_id !== 0 ? new Modification($modifier_id) : false;
         

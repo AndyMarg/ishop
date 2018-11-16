@@ -17,6 +17,8 @@ class View {
     private $meta = [];
     // шаблон html
     private $layout;
+    // js скрипты 
+    private $scripts = [];
     
     public function __construct(Controller $controller, $layout = '') {
         $config = Application::getConfig();
@@ -77,6 +79,7 @@ class View {
             if (false !== $this->layout) {
                 $file = $this->getLyaoutFilePath();
                 if (is_file($file)) {
+                    $content = $this->cutScripts($content);
                     require $file;
                 } else {
                     throw new \Exception("Не найден шаблон HTML: {$file}",500);
@@ -117,5 +120,28 @@ class View {
             "<title>{$this->meta['title']}</title>" . PHP_EOL .
             "<meta name=\"description\" content=\"{$this->meta['description']}\">" . PHP_EOL .
             "<meta name=\"keywords\" content=\"{$this->meta['keywords']}\">\n" . PHP_EOL;
+    }
+    
+    /**
+     * Вырезаем скрипты и помещаем в массив $this->scripts
+     * @param type $content
+     * @return type
+     */
+    private function cutScripts($content) {
+        $pattern = "#<script.*?>.*?</script>#si";
+        preg_match_all($pattern, $content, $this->scripts);
+        if (!empty($this->scripts)) {
+            $content = preg_replace($pattern, '', $content);
+        }
+        return $content;
+    }
+    
+    /**
+     Для вывода предварительно вырезанных скриптов в шаблоне
+     */
+    protected function insertScripts() {
+        foreach ($this->scripts[0] as $script) {
+            echo "{$script}\n";
+        }
     }
 }
