@@ -60,7 +60,7 @@ class ModelList implements IteratorAggregate {
      * true, если список пуст, иначе false
      * @return type
      */
-    public function is_empty() {
+    public function isEmpty() {
         return empty($this->items);
     }
     

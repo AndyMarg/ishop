@@ -79,11 +79,14 @@ class View {
             if (false !== $this->layout) {
                 $file = $this->getLyaoutFilePath();
                 if (is_file($file)) {
+                    // вырезаем скрипты из вида, впоследствии вставим их в шаблоне через insertScripts()
                     $content = $this->cutScripts($content);
                     require $file;
                 } else {
                     throw new \Exception("Не найден шаблон HTML: {$file}",500);
                 }
+            } else {
+                echo $content;
             }
         } else {
             throw new \Exception("Не найдено представление: {$file}",500);

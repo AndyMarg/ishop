@@ -145,7 +145,7 @@
                 <div class="footer-top">
                     <div class="col-md-6 footer-left">
                         <form>
-                            <input type="text" value="Enter Your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Your Email';}">
+                            <input type="text" value="Enter Your Email" onfocus="this.value = '';" onblur="if (this.value === '') {this.value = 'Enter Your Email';}">
                             <input type="submit" value="Subscribe">
                         </form>
                     </div>
@@ -164,13 +164,32 @@
                 echo \core\base\Application::getDb()->getLogHtml();
             }
         ?>
+        
+        <!-- Cart modal window -->
+        <div id="cart" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Корзина</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button id="cart-btn-close" type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
+                        <a id="cart-btn-order" href="cart/view" type="button" class="btn btn-primary">Оформить заказ</a>
+                        <button id="cart-btn-clear" type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->     
+        <!-- END Cart modal window -->
 
         <!--scripts-->
-        <!--End-slider-script-->
+        <script src="js/bootstrap.min.js"></script>
         <script src="js/megamenu.js"></script>
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-        <!--start-menu-->
-        <script src="js/simpleCart.min.js"></script>
         <!--dropdown-->
         <script src="js/jquery.easydropdown.js"></script>			
         <!--Slider-Starts-Here-->
@@ -196,7 +215,6 @@
             });
         </script>
         <!--dropdown accordeon-->
-        <!--<script src="js/jquery.easydropdown.js"></script>-->	
         <script type="text/javascript">
                 $(function() {
 

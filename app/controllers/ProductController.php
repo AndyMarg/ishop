@@ -33,10 +33,6 @@ class ProductController extends AppController {
 
         $this->getView()->setMeta($product->title, $product->description, $product->keywords);
         $this->getView()->setData(compact('product', 'currency'));
-        
-        // хлебные крошки
-        
-        // модификации товара
     }
     
     

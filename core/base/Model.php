@@ -21,7 +21,7 @@ abstract class Model {
     /**
      * Доступ к несуществующему свойству объекта
      * @param type $property Имя свойства или часть имени публичного метода get{$Property}()
-     * @return mix Значение свойства (элемента массива, где ключ - имя свойства  результат вызова метода 
+     * @return mix Значение свойства (элемента массива, где ключ - имя свойства или результат вызова метода 
      * @throws \Exception Если такого элемента массива не существует
      */
     public function __get($property) {
@@ -34,6 +34,19 @@ abstract class Model {
         } elseif (method_exists($this, $method)) {
             return $this->$method();
         }
+    }
+    
+    /**
+     * Установка несуществующего свойства объекта
+     * @param type $property  Имя свойства
+     * @param type $value Значение свойства
+     * @throws \Exception
+     */
+    public function __set($property, $value) {
+        if (!array_key_exists($property, $this->data)) {
+            throw new \Exception("Not found property \"{$property}\"");
+        } 
+        $this->data[$property] = $value;
     }
     
     public function __isset($property) {
@@ -51,5 +64,12 @@ abstract class Model {
     public function asArray() {
         return $this->data;
     }
-    
+
+    /**
+     * Действительна ли модель
+     * @return bool true, есди данные имеются (например, из бд)
+     */
+    public function isEmpty() {
+        return empty($this->data);
+    }
 }

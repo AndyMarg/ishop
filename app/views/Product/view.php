@@ -23,7 +23,7 @@
                         <div class="sngl-top">
                                 <div class="col-md-5 single-top-left">	
                                         
-                                        <?php if (!$product->gallery->is_empty()): ?>
+                                        <?php if (!$product->gallery->isEmpty()): ?>
                                             <div class="flexslider">
                                                 <ul class="slides">
                                                     <?php foreach ($product->gallery as $item): ?>   
@@ -80,7 +80,7 @@
                                                 <p><?=$product->content?></p>
                                             
                                             <!-- product modifications -->    
-                                            <?php if(!$product->modifications->is_empty()): ?>    
+                                            <?php if(!$product->modifications->isEmpty()): ?>    
                                             <div class="available">
                                                 <ul>
                                                     <li>
@@ -149,7 +149,7 @@
                 </ul>   
                         </div>
                          
-                    <?php if (!$product->linked->is_empty()):?>    
+                    <?php if (!$product->linked->isEmpty()):?>    
                             <div class="latestproducts">
                                    <h3>С этим товаром также покупают:</h3>
                                     <div class="product-one">

@@ -43,7 +43,7 @@ class Utils {
             $redirect = $url;
         } else {
             $referer = filter_input(INPUT_SERVER, 'HTTP_REFERER');
-            $redirect = isset($referer) ? filter_input(INPUT_SERVER, 'HTTP_REFERER') : Application::getConfig()->dirs->root . '/';
+            $redirect = isset($referer) ? filter_input(INPUT_SERVER, 'HTTP_REFERER') : Application::getConfig()->dirs->root;
         }
         header("Location: $redirect");
         exit;
