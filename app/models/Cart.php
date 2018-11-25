@@ -28,7 +28,7 @@ class Cart extends Model {
      */
     public function addProduct(Product $product, int $quantity, Modification $modification = null) {
         if ($modification) {
-            $$id = "{$product->id}-{$modification->id}";
+            $id = "{$product->id}-{$modification->id}";
             $temp['title'] = "{$product->title} ({$modification->title})";
             $temp['price'] = $modification->price;
         } else {

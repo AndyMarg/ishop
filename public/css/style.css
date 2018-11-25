@@ -3115,6 +3115,9 @@ ul.tag-men {
     color: red;
 }
 
-#main-price {
-    
+#main-price {}
+
+#cart table img {
+    height: 50px;
 }
+

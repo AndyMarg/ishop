@@ -1,3 +1,4 @@
+<?php $currency =(new \app\models\Currencies)->getCurrent(); ?>
 <?php if(!$cart->isEmpty()): ?>
     <div class="table-responsive">
         <table class="table table-hover table-striped">
@@ -11,13 +12,34 @@
                 </row>
             </thead>
             <tbody>
-                
+                <?php foreach ($cart->products as $id => $product): ?>
+                    <tr>
+                        <td><a href="product/<?=$product['alias']?>"><img src="images/<?=$product['img']?>" alt=""></a></td>
+                        <td><a href="product/<?=$product['alias']?>"><?=$product['title'];?></a></td>
+                        <td><?=$product['quantity'];?></td>
+                        <td>
+                            <?php echo $currency->symbol_left . $product['price'] * $currency->value . $currency->symbol_right; ?>
+                        </td>
+                        <td><span data-id="<?=$id?>" class="glyphicon glyphicon-remove text-danger delete-item" aria-hidden="true"></span></td>
+                    </tr>
+                <?php endforeach; ?>
+                    <tr>
+                        <td>Итого:</td>
+                        <td colspan="4" class="text-right cart-quantity"><?=$cart->quantity?></td>
+                    </tr>    
+                    <tr>
+                        <td>На сумму:</td>
+                        <td colspan="4" class="text-right cart-sum">
+                            <?php echo $currency->symbol_left . $cart->sum * $currency->value . $currency->symbol_right; ?>
+                        </td>
+                    </tr>    
             </tbody>
         </table>
     </div>
 <?php else: ?>
     <h3 id="cart_is_empty">Корзина пуста</h3>
 <?php endif; ?>
+
 
 
 
